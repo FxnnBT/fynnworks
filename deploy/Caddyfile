@@ -1,0 +1,20 @@
+# Eén canonical host, de rest stuurt permanent door. Anders staan .nl en .com
+# met identieke content tegen elkaar te concurreren in Google.
+#
+# Wil je .com als hoofddomein? Verwissel de twee blokken hieronder én zet
+# `url` in lib/site.ts op hetzelfde domein. Die twee moeten gelijk blijven.
+
+fynnworks.nl {
+	encode zstd gzip
+	reverse_proxy localhost:3000
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+	}
+}
+
+www.fynnworks.nl, fynnworks.com, www.fynnworks.com {
+	redir https://fynnworks.nl{uri} permanent
+}
