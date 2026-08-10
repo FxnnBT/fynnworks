@@ -6,5 +6,5 @@ export const SITE = {
   url: "https://fynnworks.nl",
   /** Adres dat zichtbaar op de site staat. Waar formulieren heen gaan
    *  staat los hiervan in CONTACT_TO (.env). */
-  email: "hallo@fynnworks.nl",
+  email: "info@fynnworks.nl",
 } as const

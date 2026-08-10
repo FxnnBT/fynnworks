@@ -21,7 +21,15 @@ export function ContactForm({ dict }: { dict: Dict["contact"] }) {
     state.status === "error" ? dict.errors[state.reason] : undefined
 
   return (
-    <form action={formAction} className="flex flex-col gap-7" noValidate={false}>
+    // Chrome's autofill zet een `__gcruniqueid` op formulieren voordat React
+    // hydrateert; dat leest React als een mismatch. Onderdrukt alleen dit
+    // element — mismatches in de velden eronder blijven zichtbaar.
+    <form
+      action={formAction}
+      className="flex flex-col gap-7"
+      noValidate={false}
+      suppressHydrationWarning
+    >
       <div className="grid gap-7 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="name" className="eyebrow">
@@ -79,7 +87,24 @@ export function ContactForm({ dict }: { dict: Dict["contact"] }) {
         <input id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="flex flex-wrap items-center gap-4">
+      {/* Blijft altijd in de DOM staan: aria-live kondigt alleen wijzigingen
+          aan binnen een element dat er al was toen de pagina laadde. */}
+      <div aria-live="polite" role="status">
+        {state.status === "sent" ? (
+          <p className="flex items-center gap-3 border-l-2 border-warm bg-warm/10 px-4 py-3 text-sm text-warm">
+            <Check className="size-4 shrink-0" />
+            {dict.success}
+          </p>
+        ) : null}
+        {error ? (
+          <p className="flex items-center gap-3 border-l-2 border-destructive bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            <TriangleAlert className="size-4 shrink-0" />
+            {error}
+          </p>
+        ) : null}
+      </div>
+
+      <div>
         <button
           type="submit"
           disabled={pending}
@@ -88,21 +113,6 @@ export function ContactForm({ dict }: { dict: Dict["contact"] }) {
           {pending ? dict.sending : dict.submit}
           <ArrowRight className="size-4 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1" />
         </button>
-
-        <p aria-live="polite" className="text-sm">
-          {state.status === "sent" ? (
-            <span className="inline-flex items-center gap-2 text-warm">
-              <Check className="size-4" />
-              {dict.success}
-            </span>
-          ) : null}
-          {error ? (
-            <span className="inline-flex items-center gap-2 text-destructive">
-              <TriangleAlert className="size-4" />
-              {error}
-            </span>
-          ) : null}
-        </p>
       </div>
     </form>
   )

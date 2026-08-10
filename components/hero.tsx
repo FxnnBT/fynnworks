@@ -6,14 +6,28 @@ export function Hero({ dict }: { dict: Dict }) {
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden">
       <div aria-hidden className="absolute inset-0">
-        {/* Statische fallback wanneer de bezoeker minder beweging wil. */}
-        <div className="absolute inset-0 hidden bg-[radial-gradient(120%_90%_at_15%_10%,oklch(0.32_0_0),oklch(0.145_0_0)_60%)] motion-reduce:block" />
+        {/* Statische achtergrond, ligt er altijd onder. De shader tekent
+            dekkend, dus normaal zie je hem niet. Draait de shader niet — geen
+            WebGL, mislukte compile, verloren context, of minder beweging
+            gevraagd — dan blijft dit staan in plaats van een leeg vlak.
+            De lichte plek staat rechtsboven: het enige stuk dat de scrim in
+            beide layouts vrijlaat. */}
+        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_80%_15%,oklch(0.32_0_0),oklch(0.145_0_0)_60%)]" />
         <div className="absolute inset-0 motion-reduce:hidden">
           <ShaderBackground className="h-full w-full" />
         </div>
         {/* Scrim. De shader wordt lokaal tot ~234/255 licht; witte tekst is
-            daarop onleesbaar. Links donker houden, rechts de golven laten zien. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/25" />
+            daarop onleesbaar. Op portret staat de tekst onderaan, dus daar
+            loopt de scrim van boven naar onder — anders blijft er van de
+            golven alleen een strookje rechtsboven over. Twee losse elementen
+            i.p.v. sm:-varianten op één div: Tailwind v4 stelt gradients samen
+            uit CSS-variabelen, en positie én stops overschrijven op hetzelfde
+            element is fragieler dan het gewoon om te wisselen.
+            De verloop loopt bewust snel op: iOS krimpt 100svh naar ~665px zodra
+            de Safari-balken staan, en omdat de tekst onderaan hangt zit de kop
+            dan op ~47% i.p.v. ~70% — dus juist daar moet het al donker zijn. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/80 to-background sm:hidden" />
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-background via-background/85 to-background/25 sm:block" />
         {/* Laat de shader naar de paginakleur zakken zodat de eerste sectie
             eronder doorloopt in plaats van er hard tegenaan te botsen. */}
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent to-background" />

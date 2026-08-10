@@ -42,12 +42,28 @@ git clone <repo> /srv/fynnworks && cd /srv/fynnworks
 npm ci && npm run build
 
 sudo install -m 600 /dev/null /etc/fynnworks.env
-sudo nano /etc/fynnworks.env        # inhoud van .env.example, ingevuld
+sudo nano /etc/fynnworks.env
 sudo cp deploy/fynnworks.service /etc/systemd/system/
 sudo systemctl enable --now fynnworks
 ```
 
-Caddy ervoor voor automatisch TLS (`deploy/Caddyfile`).
+`.env.example` staat niet in git (`.gitignore` negeert `.env*`), dus de inhoud
+van `/etc/fynnworks.env` staat hier:
+
+```
+SMTP_HOST=smtp.hostnet.nl
+SMTP_PORT=587
+SMTP_USER=info@fynnworks.nl
+SMTP_PASS=<wachtwoord van de mailbox>
+CONTACT_TO=info@fynnworks.nl
+```
+
+`mailout.hostnet.nl` werkt niet van buiten Hostnets netwerk — die timet out op
+25, 465 en 587. Gebruik `smtp.hostnet.nl`.
+
+De service luistert op **poort 3500** (`deploy/fynnworks.service`); Caddy proxyt
+daarnaartoe en regelt TLS (`deploy/Caddyfile`). Wijzig je de poort, pas dan
+beide bestanden aan.
 
 ## Domeinen
 

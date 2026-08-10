@@ -319,7 +319,20 @@ export function ShaderBackground({ className }: { className?: string }) {
     if (pendingRelease !== undefined) window.clearTimeout(pendingRelease)
     pendingContextReleases.delete(canvas)
     const gl = canvas.getContext("webgl", { antialias: false })
-    if (!gl) return
+    // Bij elk faalpad hieronder blijft het canvas doorzichtig en zie je de
+    // statische achtergrond eronder (zie hero.tsx) in plaats van een leeg vlak.
+    if (!gl) {
+      console.error("[ShaderBackground] geen WebGL-context")
+      return
+    }
+
+    // Zonder preventDefault probeert de browser de context niet te herstellen.
+    // iOS ruimt GPU-werk agressief op, dus dit gebeurt daar echt.
+    const onContextLost = (event: Event) => {
+      event.preventDefault()
+      console.error("[ShaderBackground] WebGL-context verloren")
+    }
+    canvas.addEventListener("webglcontextlost", onContextLost)
 
     const compile = (type: number, src: string) => {
       const s = gl.createShader(type)!
@@ -333,8 +346,24 @@ export function ShaderBackground({ className }: { className?: string }) {
     gl.attachShader(program, vertexShader)
     gl.attachShader(program, fragmentShader)
     gl.linkProgram(program)
+    // WebGL gooit geen fout bij een mislukte compile of link: drawArrays tekent
+    // dan gewoon niets. Zonder deze check is een shader die op één engine niet
+    // vertaalt niet te onderscheiden van een egaal donkere achtergrond.
+    const shaderError =
+      (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS) &&
+        `vertex: ${gl.getShaderInfoLog(vertexShader)}`) ||
+      (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS) &&
+        `fragment: ${gl.getShaderInfoLog(fragmentShader)}`) ||
+      (!gl.getProgramParameter(program, gl.LINK_STATUS) &&
+        `link: ${gl.getProgramInfoLog(program)}`)
     gl.deleteShader(vertexShader)
     gl.deleteShader(fragmentShader)
+    if (shaderError) {
+      console.error(`[ShaderBackground] ${shaderError}`)
+      gl.deleteProgram(program)
+      canvas.removeEventListener("webglcontextlost", onContextLost)
+      return
+    }
     gl.useProgram(program)
 
     const buf = gl.createBuffer()
@@ -561,6 +590,7 @@ export function ShaderBackground({ className }: { className?: string }) {
       cancelAnimationFrame(raf)
       resizeObserver.disconnect()
       intersectionObserver.disconnect()
+      canvas.removeEventListener("webglcontextlost", onContextLost)
       document.removeEventListener("visibilitychange", onVisibilityChange)
       window.removeEventListener("resize", updateLayout)
       if (UNIFORMS.cursorEnabled) {

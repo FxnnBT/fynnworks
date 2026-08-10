@@ -6,7 +6,7 @@
 
 fynnworks.nl {
 	encode zstd gzip
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:3500
 
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
