@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { getDictionary, isLang } from "@/content/dictionaries"
 import { Contact } from "@/components/contact"
+import { Faq } from "@/components/faq"
 import { Hero } from "@/components/hero"
 import { Process } from "@/components/process"
 import { Services } from "@/components/services"
@@ -25,6 +26,7 @@ export default async function HomePage({
         <Work dict={dict} lang={lang} />
         <Services dict={dict} />
         <Process dict={dict} />
+        <Faq dict={dict} />
         <Contact dict={dict} />
       </main>
       <SiteFooter dict={dict} />

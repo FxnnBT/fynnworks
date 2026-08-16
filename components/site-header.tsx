@@ -8,6 +8,7 @@ export function SiteHeader({ dict, lang }: { dict: Dict; lang: Lang }) {
     { href: "#work", label: dict.nav.work },
     { href: "#services", label: dict.nav.services },
     { href: "#process", label: dict.nav.process },
+    { href: "#faq", label: dict.nav.faq },
   ]
 
   return (

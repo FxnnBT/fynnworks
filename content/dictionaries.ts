@@ -15,6 +15,7 @@ const nl = {
     work: "Werk",
     services: "Diensten",
     process: "Werkwijze",
+    faq: "Vragen",
     contact: "Contact",
     cta: "Start een project",
   },
@@ -38,7 +39,7 @@ const nl = {
         points: ["Ontwerp op maat", "Contactformulier", "Vindbaar in Google"],
       },
       {
-        name: "Bedrijfssite",
+        name: "Multi-page site",
         price: "vanaf €1.200",
         description:
           "Meerdere pagina's, een duidelijk verhaal en een structuur waar je jaren mee vooruit kunt.",
@@ -85,6 +86,43 @@ const nl = {
       },
     ],
   },
+  faq: {
+    eyebrow: "Vragen",
+    title: "Wat mensen meestal vragen",
+    lead: "Staat je vraag er niet bij? Stel hem hieronder.",
+    items: [
+      {
+        question: "Wat gaat dit kosten?",
+        answer:
+          "De richtprijzen staan hierboven bij Diensten. Na het kennismakingsgesprek krijg je een vaste prijs — geen uurtje-factuurtje, geen verrassing achteraf.",
+      },
+      {
+        question: "Hoe lang duurt het voor de site live staat?",
+        answer:
+          "Een landingspagina binnen twee weken, een site van vijf tot tien pagina's meestal vier tot zes. Dat hangt vooral af van hoe snel jij teksten en beelden aanlevert.",
+      },
+      {
+        question: "Kan ik daarna zelf teksten aanpassen?",
+        answer:
+          "Ja. Je krijgt de site met een handleiding waarin staat waar elke tekst vandaan komt. Kleine wijzigingen doe je zelf; wil je liever dat ik het doe, dan kan dat ook.",
+      },
+      {
+        question: "Regel jij ook domein, hosting en e-mail?",
+        answer:
+          "Ja, dat hoort erbij. Ik zet het op, richt je domein goed in en zorg dat je mail blijft werken. Het domein staat op jouw naam.",
+      },
+      {
+        question: "Ik heb al een site. Kan die opgeknapt worden?",
+        answer:
+          "Meestal bouw ik liever opnieuw dan dat ik een bestaande site oplap: dat is sneller klaar en het resultaat gaat langer mee. Je teksten, beelden en Google-posities nemen we gewoon mee.",
+      },
+      {
+        question: "Van wie is de site als we klaar zijn?",
+        answer:
+          "Van jou. Domein, code en beeldmateriaal zijn jouw eigendom. Je zit niet vast aan een abonnement en kunt er op elk moment mee naar iemand anders.",
+      },
+    ],
+  },
   contact: {
     eyebrow: "Contact",
     title: "Een site nodig?",
@@ -126,6 +164,7 @@ const en: Dict = {
     work: "Work",
     services: "Services",
     process: "Process",
+    faq: "FAQ",
     contact: "Contact",
     cta: "Start a project",
   },
@@ -149,7 +188,7 @@ const en: Dict = {
         points: ["Custom design", "Contact form", "Findable on Google"],
       },
       {
-        name: "Company site",
+        name: "Multi-page site",
         price: "from €1,200",
         description:
           "Multiple pages, a clear story, and a structure that lasts you years.",
@@ -193,6 +232,43 @@ const en: Dict = {
         name: "Launch",
         description:
           "I handle domain, hosting and email. After that you can take over, or leave the upkeep to me.",
+      },
+    ],
+  },
+  faq: {
+    eyebrow: "FAQ",
+    title: "What people usually ask",
+    lead: "Question not covered? Ask it below.",
+    items: [
+      {
+        question: "What is this going to cost?",
+        answer:
+          "Ballpark prices are under Services above. After the intro call you get a fixed price — no hourly billing, no surprises at the end.",
+      },
+      {
+        question: "How long until the site is live?",
+        answer:
+          "A landing page within two weeks, a five to ten page site usually four to six. Mostly it depends on how quickly you get me your copy and images.",
+      },
+      {
+        question: "Can I edit the text myself afterwards?",
+        answer:
+          "Yes. The site ships with a guide showing where every piece of text lives. Small changes you make yourself; if you would rather I did them, that works too.",
+      },
+      {
+        question: "Do you handle domain, hosting and email?",
+        answer:
+          "Yes, that is part of it. I set it up, point your domain correctly and make sure your mail keeps working. The domain is registered in your name.",
+      },
+      {
+        question: "I already have a site. Can it be fixed up?",
+        answer:
+          "Usually I would rather rebuild than patch an existing site: it is quicker to finish and the result lasts longer. Your copy, images and Google rankings come along.",
+      },
+      {
+        question: "Who owns the site when we are done?",
+        answer:
+          "You do. Domain, code and imagery are yours. There is no subscription tying you in, and you can take all of it to someone else at any time.",
       },
     ],
   },
