@@ -34,7 +34,12 @@ export async function generateMetadata({
     description: dict.meta.description,
     alternates: {
       canonical: `/${lang}`,
-      languages: Object.fromEntries(LANGS.map((l) => [l, `/${l}`])),
+      languages: {
+        ...Object.fromEntries(LANGS.map((l) => [l, `/${l}`])),
+        // Voor bezoekers wier taal geen van beide is; zonder dit kiest Google
+        // zelf een variant en dat is niet altijd de Nederlandse.
+        "x-default": "/nl",
+      },
     },
     openGraph: {
       title: dict.meta.title,
@@ -56,6 +61,7 @@ export default async function LangLayout({
 }) {
   const { lang } = await params
   if (!isLang(lang)) notFound()
+  const dict = getDictionary(lang)
 
   return (
     <html
@@ -69,6 +75,24 @@ export default async function LangLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col overflow-x-hidden">
+        {/* Vertelt Google dat "fynnworks" een organisatie is en niet een
+            typefout. Vaste waarden uit lib/site.ts, geen gebruikersinvoer. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: SITE.name,
+              url: SITE.url,
+              email: SITE.email,
+              description: dict.meta.description,
+              areaServed: "NL",
+              knowsLanguage: ["nl", "en"],
+              serviceType: "Webdesign en webdevelopment",
+            }),
+          }}
+        />
         {children}
       </body>
     </html>
