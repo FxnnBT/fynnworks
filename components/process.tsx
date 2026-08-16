@@ -18,7 +18,7 @@ export function Process({ dict }: { dict: Dict }) {
             >
               <span
                 aria-hidden
-                className="font-display text-5xl leading-none text-muted-foreground/30 transition-colors duration-300 group-hover:text-warm"
+                className="font-display text-5xl leading-none text-muted-foreground/30 transition-colors duration-300 group-hover:text-warm [@media(hover:none)]:text-warm"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>

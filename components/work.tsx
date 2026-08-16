@@ -52,7 +52,9 @@ export function Work({ dict, lang }: { dict: Dict; lang: Lang }) {
                     alt=""
                     width={wide ? 1600 : 1200}
                     height={wide ? 1000 : 750}
-                    className="h-full w-full object-cover opacity-70 grayscale transition-all duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    // Zonder muis is er geen scroll-onthulling: grijs zou daar
+                    // permanent grijs blijven, dus op touch meteen in kleur.
+                    className="h-full w-full object-cover opacity-70 grayscale transition-all duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0 motion-reduce:transition-none motion-reduce:group-hover:scale-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:grayscale-0"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
                   {project.status ? (

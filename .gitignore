@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphify kennisgraaf — lokaal gereedschap, hoort niet op de Pi
+/graphify-out/

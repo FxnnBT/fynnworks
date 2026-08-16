@@ -29,6 +29,10 @@ componenten open te maken om tekst, prijzen of projecten te wijzigen.
       weet beter wat je er precies voor ze gedaan hebt.
 - [ ] **`public/work/*.jpg`** — de twee screenshots heb ik uit het browservenster
       gemaakt. Bruikbaar, maar eigen beelden zijn beter (zie punt 3).
+- [ ] **`content/dictionaries.ts` → `faq.items`** — de zes vragen en antwoorden
+      zijn door mij geschreven op basis van wat er verder op de site staat. Lees
+      ze één keer door: de doorlooptijden, wie domein en hosting regelt en wat
+      er over eigendom staat moeten kloppen met hoe jij het echt doet.
 Het favicon staat al goed: `app/icon.png` (512×512, browsertabblad) en
 `app/apple-icon.png` (180×180, snelkoppeling op iOS-beginscherm), gemaakt van je
 logo. Wil je later een ander logo: vervang die twee bestanden, verder niets —
@@ -45,7 +49,7 @@ Open `content/dictionaries.ts`. Onderstaande sleutels zitten allemaal in het
 
 | Wat je ziet | Sleutel |
 |---|---|
-| Menu-items "Werk / Diensten / Werkwijze" | `nav.work`, `nav.services`, `nav.process` |
+| Menu-items "Werk / Diensten / Werkwijze / Vragen" | `nav.work`, `nav.services`, `nav.process`, `nav.faq` |
 | Gele knop rechtsboven | `nav.cta` |
 
 De naam **fynnworks** linksboven komt uit `lib/site.ts` (`SITE.name`).
@@ -97,6 +101,23 @@ Doe je dat, doe het dan in **beide** talen — de lijsten moeten even lang zijn.
 Kop: `process.eyebrow`, `process.title`.
 `process.steps` is een lijst van vier stappen met `name` en `description`.
 De nummers 01–04 worden automatisch gezet.
+
+### Vragen
+
+Kop en tussenkop: `faq.eyebrow`, `faq.title`, `faq.lead`.
+`faq.items` is een lijst met per vraag een `question` en een `answer`. De
+nummers 01, 02, 03… worden automatisch gezet, dus vragen toevoegen, weghalen of
+omwisselen mag — in **beide** talen, de lijsten moeten even lang zijn.
+
+Twee dingen bewust zo gelaten:
+
+- **Geen prijzen in de antwoorden.** Het antwoord op "Wat gaat dit kosten?"
+  verwijst naar Diensten in plaats van bedragen te herhalen. Anders moet je bij
+  elke prijswijziging op twee plekken zijn en vergeet je er één.
+- **Openklappen zonder JavaScript.** De vragen gebruiken het `<details>`-element
+  van de browser zelf. Eén vraag tegelijk open is standaardgedrag; toetsenbord
+  en schermlezer werken vanzelf. In oude browsers kunnen meerdere vragen
+  tegelijk openstaan — verder verandert er niets.
 
 ### Contact
 
@@ -171,7 +192,8 @@ Een paar dingen om te weten:
 
 De beelden staan bewust in zwart-wit en kleuren in als je eroverheen gaat. Dat
 zit in `components/work.tsx` (`grayscale` / `group-hover:grayscale-0`) als je
-het anders wilt.
+het anders wilt. Op telefoon en tablet staan ze meteen in kleur — daar is geen
+muis om eroverheen te gaan, dus grijs zou grijs blijven.
 
 ---
 
