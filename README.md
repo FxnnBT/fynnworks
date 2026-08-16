@@ -36,15 +36,47 @@ Next-beeldoptimalisatie staat uit, zodat de Pi geen CPU aan schalen kwijt is.
 
 ## Uitrollen op de Pi
 
+### Bestanden naar de Pi
+
+Niet via git — de repo is privé en GitHub accepteert sinds 2021 geen wachtwoord
+meer voor git-operaties, dus dat kost je een access token op de Pi. Kopieer
+direct over SSH:
+
+```bash
+# op de Pi, eenmalig
+sudo mkdir -p /srv/fynnworks && sudo chown <gebruiker>:<gebruiker> /srv/fynnworks
+
+# op je pc, in de projectmap — ook voor elke latere update
+git ls-files -z --cached --others --exclude-standard | tar --null -T - -czf - \
+  | ssh <gebruiker>@<pi-host> "tar -xzf - -C /srv/fynnworks"
+```
+
+`git ls-files` als bron betekent dat `.gitignore` het filteren doet: geen
+`node_modules`, geen `.next`, geen `.git`, en vooral geen `.env.local` met je
+SMTP-wachtwoord erin. Er is dus geen exclude-lijst die kan verouderen. Het pakt
+je werkmap zoals hij is, dus je hoeft niet eerst te committen — ~550 KB.
+
+`--others --exclude-standard` zorgt dat nieuwe, nog niet gecommitte bestanden
+óók meegaan (bijvoorbeeld een verificatiebestand in `public/`). Zonder die twee
+vlaggen ziet `git ls-files` alleen wat al in git zit en verdwijnt zo'n bestand
+stilzwijgend uit de overdracht. `.gitignore` blijft gerespecteerd.
+
+De map moet van dezelfde gebruiker zijn als `User=` in
+`deploy/fynnworks.service` (nu `pi`), anders kan de service straks niet in
+`.next` schrijven. `ReadWritePaths` geeft padrechten, geen eigendom.
+
+### Installeren
+
 ```bash
 # op de Pi
-git clone <repo> /srv/fynnworks && cd /srv/fynnworks
+cd /srv/fynnworks
 npm ci && npm run build
 
 sudo install -m 600 /dev/null /etc/fynnworks.env
 sudo nano /etc/fynnworks.env
 sudo cp deploy/fynnworks.service /etc/systemd/system/
 sudo systemctl enable --now fynnworks
+curl -I localhost:3500/nl            # hoort 200 te geven
 ```
 
 `.env.example` staat niet in git (`.gitignore` negeert `.env*`), dus de inhoud
@@ -65,6 +97,25 @@ De service luistert op **poort 3500** (`deploy/fynnworks.service`); Caddy proxyt
 daarnaartoe en regelt TLS (`deploy/Caddyfile`). Wijzig je de poort, pas dan
 beide bestanden aan.
 
+### Bijwerken
+
+```bash
+# op je pc
+git ls-files -z --cached --others --exclude-standard | tar --null -T - -czf - \
+  | ssh <gebruiker>@<pi-host> "tar -xzf - -C /srv/fynnworks"
+
+# op de Pi
+sudo systemctl stop fynnworks        # ProtectSystem=strict: alleen .next is schrijfbaar
+cd /srv/fynnworks && npm run build
+sudo systemctl start fynnworks
+```
+
+Alleen `deploy/fynnworks.service` gewijzigd? Dan hoeft er niet gebouwd te
+worden: `sudo cp deploy/fynnworks.service /etc/systemd/system/ && sudo systemctl
+daemon-reload && sudo systemctl restart fynnworks`.
+
+Nieuwe of gewijzigde dependencies (`package.json`)? Dan `npm ci` vóór de build.
+
 ## Domeinen
 
 `fynnworks.nl` is de canonical host. `www.fynnworks.nl`, `fynnworks.com` en
@@ -83,6 +134,7 @@ Buiten de code te regelen:
 Wissel je van hoofddomein, pas dan **beide** aan: het eerste blok in
 `deploy/Caddyfile` én `url` in `lib/site.ts`.
 
-Heeft de Pi te weinig geheugen om te builden? Build op je pc en kopieer
-`.next/standalone`, `.next/static` en `public` naar de Pi; `output: "standalone"`
-staat al aan in `next.config.ts`.
+Heeft de Pi te weinig geheugen om te builden? Zet er swap bij
+(`sudo dphys-swapfile swapoff && sudo nano /etc/dphys-swapfile && sudo dphys-swapfile setup && sudo dphys-swapfile swapon`).
+Bouwen op je pc en de output kopiëren is geen optie: dat is x86 → ARM en de
+getracede `node_modules` kunnen platformspecifieke binaries bevatten.

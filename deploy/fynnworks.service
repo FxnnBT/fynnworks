@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=fynn
+User=pi
 WorkingDirectory=/srv/fynnworks
 # Bevat SMTP_PASS — chmod 600, eigenaar root.
 EnvironmentFile=/etc/fynnworks.env
@@ -14,6 +14,9 @@ Environment=PORT=3500
 ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -p 3500
 Restart=always
 RestartSec=5
+# next reageert netjes op SIGTERM en eindigt met 143; zonder dit meldt systemd
+# elke stop als "Failed with result 'exit-code'".
+SuccessExitStatus=143
 # Caddy is de enige die erbij hoeft.
 NoNewPrivileges=true
 PrivateTmp=true
