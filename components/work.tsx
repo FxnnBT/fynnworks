@@ -36,7 +36,7 @@ export function Work({ dict, lang }: { dict: Dict; lang: Lang }) {
                       rel: "noreferrer noopener",
                     }
                   : {})}
-                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-card/40 transition-colors duration-300 hover:border-foreground/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warm ${
+                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-card/40 transition-colors duration-300 hover:border-foreground/20 ${
                   wide ? "sm:col-span-2" : ""
                 }`}
               >
@@ -53,10 +53,21 @@ export function Work({ dict, lang }: { dict: Dict; lang: Lang }) {
                     width={wide ? 1600 : 1200}
                     height={wide ? 1000 : 750}
                     // Zonder muis is er geen scroll-onthulling: grijs zou daar
-                    // permanent grijs blijven, dus op touch meteen in kleur.
-                    className="h-full w-full object-cover opacity-70 grayscale transition-all duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0 motion-reduce:transition-none motion-reduce:group-hover:scale-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:grayscale-0"
+                    // permanent grijs blijven, dus op touch meteen in kleur —
+                    // en dan ook zonder de brightness-correctie hieronder.
+                    //
+                    // De screenshots zijn zelf donker (gemiddelde luminantie 33
+                    // en 43 van 255): het zijn nou eenmaal donkere sites. Grijs
+                    // op een bijna-zwarte pagina liet ze daardoor in het niets
+                    // vallen. brightness tilt ze uit de achtergrond zonder de
+                    // donkere opzet van die sites te verloochenen; kleur blijft
+                    // het hover-moment.
+                    className="h-full w-full object-cover grayscale brightness-150 transition-all duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03] group-hover:grayscale-0 motion-reduce:transition-none motion-reduce:group-hover:scale-100 [@media(hover:none)]:grayscale-0 [@media(hover:none)]:brightness-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
+                  {/* Alleen de onderrand hoeft in de kaart te zakken. Liep de
+                      donkere wash eerder tot halverwege, dan lag het werk zelf
+                      in het donker — en dat is nou net het bewijsmateriaal. */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
                   {project.status ? (
                     <span className="absolute right-4 top-4 rounded-full border border-warm/40 bg-background/70 px-3 py-1 text-xs text-warm backdrop-blur-sm">
                       {project.status[lang]}
