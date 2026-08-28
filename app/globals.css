@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -167,6 +165,13 @@
   ::selection {
     background: var(--warm);
     color: var(--warm-foreground);
+  }
+  /* Eén focusring voor de hele site. De offset is wat 'm op de zandkleurige
+     knoppen leesbaar houdt: de ring valt dan net buiten de knop, op de donkere
+     achtergrond, in plaats van zand-op-zand. */
+  :focus-visible {
+    outline: 2px solid var(--warm);
+    outline-offset: 2px;
   }
   body {
     text-wrap: pretty;
