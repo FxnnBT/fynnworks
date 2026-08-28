@@ -116,23 +116,67 @@ daemon-reload && sudo systemctl restart fynnworks`.
 
 Nieuwe of gewijzigde dependencies (`package.json`)? Dan `npm ci` vóór de build.
 
+## Demo's
+
+Losse statische proefsites staan op `fynnworks.nl/demo/<naam>/index.html`. Ze
+liggen in `public/demo/` en worden door de Next-app zelf uitgeserveerd — geen
+aparte webserver, geen build.
+
+```bash
+# per demo, vanaf je pc
+scp -r ./mijn-poc <gebruiker>@<pi-host>:/srv/fynnworks/public/demo/naam
+ssh <gebruiker>@<pi-host> "sudo systemctl restart fynnworks"
+# → https://fynnworks.nl/demo/naam/index.html
+
+# weghalen
+ssh <gebruiker>@<pi-host> "rm -rf /srv/fynnworks/public/demo/naam && sudo systemctl restart fynnworks"
+```
+
+Die herstart is nodig: Next leest `public/` bij het opstarten in, dus zonder
+herstart geeft een verse demo 404.
+
+Waar het op stukloopt:
+
+- **`/index.html` hoort in de URL.** Next doet niet aan mapindexen: `/demo/naam/`
+  wordt doorgestuurd naar `/demo/naam` en dat is een 404. Binnen de demo werken
+  relatieve links (`menu.html`) daarna gewoon.
+- Er moet dus een **`index.html`** in de wortel van de map staan.
+- Verwijs naar assets met **relatieve** paden (`./stijl.css`), niet met
+  `/stijl.css` — dat laatste zoekt vanaf de domeinwortel en belandt op de
+  hoofdsite in plaats van in je demo.
+
+Demo's blijven uit Google: `app/robots.ts` verbiedt `/demo/` en
+`next.config.ts` zet er een `X-Robots-Tag: noindex` op. Ze zijn wel gewoon te
+bezoeken door wie de link heeft; er zit geen wachtwoord op.
+
+**Ze staan niet in git.** De overdracht met `tar` hieronder pakt alleen wat git
+kent, dus je demo's gaan nooit mee — ze blijven wel staan op de Pi, want die
+`tar -x` overschrijft alleen en verwijdert niets. Zet je de Pi opnieuw op, dan
+ben je ze kwijt; bewaar het origineel dus op je pc.
+
 ## Domeinen
 
 `fynnworks.nl` is de canonical host. `www.fynnworks.nl`, `fynnworks.com` en
-`www.fynnworks.com` sturen permanent (301) door naar `fynnworks.nl`. Caddy
-vraagt voor alle vier zelf een certificaat aan.
+`www.fynnworks.com` sturen permanent (301) door naar `fynnworks.nl`.
 
-Buiten de code te regelen:
+DNS en en TLS lopen via Cloudflare, niet vanaf deze Pi. Het
+verkeer komt van Cloudflare rechtstreeks binnen op **poort 3500**, waar de
+Next-service luistert. Cloudflare regelt daarmee ook het certificaat.
 
-- **DNS** — vier records naar je IP van je verbinding: `fynnworks.nl` en `fynnworks.com` als
-  A-record, beide `www`-varianten als CNAME naar hun kale domein.
-- **Router** — poorten 80 en 443 forwarden naar de Pi. Poort 80 moet open blijven,
-  anders kan Caddy het certificaat niet vernieuwen.
+Gevolg: **`deploy/Caddyfile` is op dit moment niet in gebruik.** Caddy staat op
+18 augustus 2026 wel geïnstalleerd en luistert op 80 en 443, maar daar komt
+niemand — een certificaataanvraag mislukt dan ook (`journalctl -u caddy` toont
+522's). Wil je Caddy alsnog gebruiken, bijvoorbeeld voor nettere demo-URL's of
+extra headers, dan moet het inkomende verkeer bij Cloudflare naar **poort 80**
+wijzen in plaats van 3500. Anders kun je Caddy net zo goed uitzetten
+(`sudo systemctl disable --now caddy`).
+
 - **Vast IP** — heb je een wisselend IP van je verbinding, dan heb je dynamische DNS nodig,
   anders is de site na een IP-wissel onbereikbaar.
 
-Wissel je van hoofddomein, pas dan **beide** aan: het eerste blok in
-`deploy/Caddyfile` én `url` in `lib/site.ts`.
+Wissel je van hoofddomein, pas dan `url` in `lib/site.ts` aan — daar komen de
+canonical-tags, `sitemap.xml` en `robots.txt` uit. Zet je Caddy ooit alsnog in
+het pad, dan moet het eerste blok in `deploy/Caddyfile` hetzelfde domein noemen.
 
 Heeft de Pi te weinig geheugen om te builden? Zet er swap bij
 (`sudo dphys-swapfile swapoff && sudo nano /etc/dphys-swapfile && sudo dphys-swapfile setup && sudo dphys-swapfile swapon`).

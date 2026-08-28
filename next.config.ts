@@ -12,6 +12,17 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [{ source: "/", destination: "/nl", permanent: false }]
   },
+  // Demo's in public/demo/ zijn klantwerk en placeholders: wel te bezoeken met
+  // de link, niet in Google. robots.txt vraagt het beleefd, deze header maakt
+  // het hard — ook voor bots die al een directe link hebben.
+  async headers() {
+    return [
+      {
+        source: "/demo/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ]
+  },
 }
 
 export default nextConfig
