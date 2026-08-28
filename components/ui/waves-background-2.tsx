@@ -315,6 +315,10 @@ export function ShaderBackground({ className }: { className?: string }) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+    // hero.tsx zet dit canvas al op display:none bij reduced motion, maar dat
+    // gebeurt in CSS: de context werd nog steeds aangemaakt en de shader
+    // gecompileerd. Hier stoppen scheelt die bezoeker het hele GPU-beslag.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const pendingRelease = pendingContextReleases.get(canvas)
     if (pendingRelease !== undefined) window.clearTimeout(pendingRelease)
     pendingContextReleases.delete(canvas)
@@ -436,6 +440,10 @@ export function ShaderBackground({ className }: { className?: string }) {
     let bounds = canvas.getBoundingClientRect()
     let raf = 0
     let lastNow: number | null = null
+    // timeScale is 0.556 — een trage drift die op 30fps net zo vloeiend oogt
+    // als op 60. Halveert het GPU-werk en de textuurchurn per seconde.
+    let lastDraw = 0
+    const MIN_FRAME_MS = 32
     let visible = document.visibilityState === "visible"
     let inView = true
     let disposed = false
@@ -545,6 +553,13 @@ export function ShaderBackground({ className }: { className?: string }) {
     const render = (now: number) => {
       raf = 0
       if (disposed || !visible || !inView) return
+      // Te vroeg: niets tekenen, wel opnieuw inplannen. lastNow blijft staan,
+      // dus de dt van het volgende frame telt deze tussentijd gewoon mee.
+      if (now - lastDraw < MIN_FRAME_MS) {
+        requestRender()
+        return
+      }
+      lastDraw = now
       const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1)
       lastNow = now
       const follow = 1 - Math.exp(-12 * dt)
