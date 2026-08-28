@@ -12,6 +12,9 @@ const nl = {
       "Ik ontwerp en bouw snelle, eigenzinnige websites voor ondernemers. Van landingspagina tot volledige bedrijfssite.",
   },
   nav: {
+    label: "Hoofdnavigatie",
+    menu: "Menu",
+    skip: "Naar inhoud",
     work: "Werk",
     services: "Diensten",
     process: "Werkwijze",
@@ -143,6 +146,13 @@ const nl = {
       rate: "Je hebt net al een bericht gestuurd. Probeer het later nog eens.",
       server: "Versturen mislukte. Mail me gerust direct.",
     },
+    // Per veld, voor wat de browser doorlaat maar de server weigert — een naam
+    // die na trim() te kort blijkt, bijvoorbeeld.
+    fieldErrors: {
+      name: "Vul je naam in, minstens twee tekens.",
+      email: "Dit lijkt geen geldig e-mailadres.",
+      message: "Schrijf iets meer, minstens tien tekens.",
+    },
     directLabel: "Liever direct mailen?",
   },
   footer: {
@@ -161,6 +171,9 @@ const en: Dict = {
       "I design and build fast, opinionated websites for small businesses. From landing page to full company site.",
   },
   nav: {
+    label: "Main navigation",
+    menu: "Menu",
+    skip: "Skip to content",
     work: "Work",
     services: "Services",
     process: "Process",
@@ -290,6 +303,11 @@ const en: Dict = {
       invalid: "Check your details and try again.",
       rate: "You just sent a message. Please try again later.",
       server: "Sending failed. Feel free to email me directly.",
+    },
+    fieldErrors: {
+      name: "Enter your name, at least two characters.",
+      email: "This does not look like a valid email address.",
+      message: "Write a little more, at least ten characters.",
     },
     directLabel: "Rather email directly?",
   },

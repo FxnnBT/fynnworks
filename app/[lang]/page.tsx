@@ -20,8 +20,16 @@ export default async function HomePage({
 
   return (
     <>
+      {/* Onzichtbaar tot je erheen tabt. Zonder dit loopt een toetsenbord elke
+          keer eerst door de hele header voordat het bij de inhoud is. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-5 focus:top-4 focus:z-100 focus:rounded-full focus:bg-warm focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-warm-foreground"
+      >
+        {dict.nav.skip}
+      </a>
       <SiteHeader dict={dict} lang={lang} />
-      <main>
+      <main id="main">
         <Hero dict={dict} />
         <Work dict={dict} lang={lang} />
         <Services dict={dict} />

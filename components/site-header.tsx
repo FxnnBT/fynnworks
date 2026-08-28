@@ -1,5 +1,6 @@
 import Link from "next/link"
 import type { Dict, Lang } from "@/content/dictionaries"
+import { MobileNav } from "@/components/mobile-nav"
 import { SITE } from "@/lib/site"
 
 export function SiteHeader({ dict, lang }: { dict: Dict; lang: Lang }) {
@@ -21,26 +22,33 @@ export function SiteHeader({ dict, lang }: { dict: Dict; lang: Lang }) {
           {SITE.name}
         </Link>
 
-        <nav
-          aria-label={dict.nav.work}
-          className="ml-auto hidden items-center gap-7 sm:flex"
-        >
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="group relative text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-warm transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:scale-x-100" />
-            </a>
-          ))}
+        <nav aria-label={dict.nav.label} className="ml-auto flex items-center">
+          {/* Op mobiel klapt dezelfde lijst uit een <details>; de ankerlinks
+              verdwijnen daar niet meer helemaal. */}
+          <MobileNav links={links} label={dict.nav.menu} />
+
+          <ul className="hidden items-center gap-7 sm:flex">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="group relative text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-warm transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:scale-x-100" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
 
+        {/* De after:-laag rekt het tikvlak naar 44px zonder dat het element zelf
+            groeit — anders zou de pil een stuk plomper worden en de balk van
+            56px vullen. Onzichtbaar, vangt de tik, verschuift niets. */}
         <Link
           href={`/${other}`}
-          aria-label={dict.langSwitch.label}
-          className="ml-auto font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-warm sm:ml-0"
+          aria-label={dict.langSwitch.other}
+          className="relative font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-warm after:absolute after:left-1/2 after:top-1/2 after:size-11 after:-translate-x-1/2 after:-translate-y-1/2 after:content-['']"
         >
           {other}
         </Link>
@@ -49,7 +57,7 @@ export function SiteHeader({ dict, lang }: { dict: Dict; lang: Lang }) {
             scherm, de enige call-to-action niet. */}
         <a
           href="#contact"
-          className="rounded-full bg-warm px-4 py-1.5 text-sm font-medium whitespace-nowrap text-warm-foreground transition-transform duration-200 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
+          className="relative rounded-full bg-warm px-4 py-1.5 text-sm font-medium whitespace-nowrap text-warm-foreground transition-transform duration-200 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 active:translate-y-0 active:duration-75 after:absolute after:inset-x-0 after:top-1/2 after:h-11 after:-translate-y-1/2 after:content-['']"
         >
           {dict.nav.cta}
         </a>
