@@ -17,7 +17,10 @@ export function Services({ dict }: { dict: Dict }) {
           {dict.services.items.map((item, index) => (
             <li
               key={item.name}
-              className="group grid gap-6 border-b border-line py-10 transition-colors hover:bg-foreground/[0.03] md:grid-cols-12 md:gap-8"
+              // Geen hover-oplichting: de rij is geen link, dus dat beloofde
+              // een klik die er niet is. Met de tap-activeert-hover-variant
+              // bleef die oplichting op touch bovendien staan.
+              className="grid gap-6 border-b border-line py-10 md:grid-cols-12 md:gap-8"
             >
               <div className="md:col-span-1">
                 <span className="font-mono text-xs text-muted-foreground">

@@ -51,14 +51,14 @@ export function Hero({ dict }: { dict: Dict }) {
           <div className="flex shrink-0 items-center gap-3">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-warm px-6 py-3 text-sm font-medium text-warm-foreground transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-full bg-warm px-6 py-3 text-sm font-medium text-warm-foreground transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 active:translate-y-0 active:duration-75"
             >
               {dict.hero.primary}
               <ArrowDownRight className="size-4 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
             </a>
             <a
               href="#work"
-              className="rounded-full border border-line px-6 py-3 text-sm text-foreground/80 backdrop-blur-sm transition-colors hover:border-foreground/30 hover:text-foreground"
+              className="rounded-full border border-line px-6 py-3 text-sm text-foreground/80 backdrop-blur-sm transition-colors hover:border-foreground/30 hover:text-foreground active:border-foreground/50"
             >
               {dict.hero.secondary}
             </a>
