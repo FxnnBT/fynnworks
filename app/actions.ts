@@ -2,13 +2,16 @@
 
 import { headers } from "next/headers"
 import nodemailer from "nodemailer"
-import { checkRate, contactSchema } from "@/lib/contact"
+import { z } from "zod"
+import {
+  CONTACT_FIELDS,
+  type ContactState,
+  type ContactValues,
+  checkRate,
+  contactSchema,
+  looksLikeSpam,
+} from "@/lib/contact"
 import { SITE } from "@/lib/site"
-
-export type ContactState =
-  | { status: "idle" }
-  | { status: "sent" }
-  | { status: "error"; reason: "invalid" | "rate" | "server" }
 
 function requireEnv(name: string): string {
   const value = process.env[name]
@@ -20,18 +23,30 @@ export async function sendContact(
   _prev: ContactState,
   formData: FormData,
 ): Promise<ContactState> {
+  // Uit de ruwe FormData, niet uit parsed.data: bij een parsefout bestaat die
+  // niet, en juist dán moeten we de invoer kunnen teruggeven.
+  const values = Object.fromEntries(
+    CONTACT_FIELDS.map((field) => [field, String(formData.get(field) ?? "")]),
+  ) as ContactValues
+
   const parsed = contactSchema.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    message: formData.get("message"),
+    ...values,
     website: formData.get("website"),
+    elapsed: formData.get("elapsed"),
   })
-  if (!parsed.success) return { status: "error", reason: "invalid" }
+  if (!parsed.success) {
+    const fieldErrors = z.flattenError(parsed.error).fieldErrors
+    // De honeypot en de tijdsval filteren we eruit: een bot hoeft niet te
+    // horen welk veld hem verraadde. Blijft er niets over, dan was het een van
+    // die twee — dan krijgt de afzender de algemene melding en verder niets.
+    const fields = CONTACT_FIELDS.filter((field) => fieldErrors[field])
+    return { status: "error", reason: "invalid", values, fields }
+  }
 
   // Caddy/nginx zetten x-forwarded-for; direct verkeer heeft 'm niet.
   const forwarded = (await headers()).get("x-forwarded-for") ?? ""
   const ip = forwarded.split(",")[0]?.trim() || "onbekend"
-  if (!checkRate(ip)) return { status: "error", reason: "rate" }
+  if (!checkRate(ip)) return { status: "error", reason: "rate", values }
 
   const { name, email, message } = parsed.data
   try {
@@ -46,13 +61,15 @@ export async function sendContact(
       from: `"${SITE.name} website" <${requireEnv("SMTP_USER")}>`,
       to: requireEnv("CONTACT_TO"),
       replyTo: `"${name}" <${email}>`,
-      subject: `Nieuwe aanvraag van ${name}`,
+      // Wel versturen, alleen taggen — één mailboxregel op "[spam?]" ruimt op,
+      // en een verkeerd beoordeelde aanvraag blijft vindbaar.
+      subject: `${looksLikeSpam(`${name} ${message}`) ? "[spam?] " : ""}Nieuwe aanvraag van ${name}`,
       text: `Van: ${name} <${email}>\nIP: ${ip}\n\n${message}\n`,
     })
     return { status: "sent" }
   } catch (error) {
     // Details blijven op de server; de bezoeker krijgt een nette melding.
     console.error("[contact] versturen mislukt:", error)
-    return { status: "error", reason: "server" }
+    return { status: "error", reason: "server", values }
   }
 }
