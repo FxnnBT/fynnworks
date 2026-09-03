@@ -4,10 +4,18 @@ import { Contact } from "@/components/contact"
 import { Faq } from "@/components/faq"
 import { Hero } from "@/components/hero"
 import { Process } from "@/components/process"
+import { Reviews } from "@/components/reviews"
 import { Services } from "@/components/services"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { Work } from "@/components/work"
+
+// Werk en reviews staan op schijf, niet in de code. De layout genereert
+// statische params voor /nl en /en, dus zonder dit zou next build de lijst van
+// dat moment inbakken - en dat moment is een handmatige build zonder
+// $STATE_DIRECTORY. Per request renderen kost hier niets en scheelt alle
+// cache-invalidatie na een wijziging in /admin.
+export const dynamic = "force-dynamic"
 
 export default async function HomePage({
   params,
@@ -32,12 +40,13 @@ export default async function HomePage({
       <main id="main">
         <Hero dict={dict} />
         <Work dict={dict} lang={lang} />
+        <Reviews dict={dict} lang={lang} />
         <Services dict={dict} />
         <Process dict={dict} />
         <Faq dict={dict} />
-        <Contact dict={dict} />
+        <Contact dict={dict} lang={lang} />
       </main>
-      <SiteFooter dict={dict} />
+      <SiteFooter dict={dict} lang={lang} />
     </>
   )
 }

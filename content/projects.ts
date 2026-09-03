@@ -1,20 +1,8 @@
-import type { Lang } from "./dictionaries"
+import type { Project } from "@/lib/store"
 
-export type Project = {
-  slug: string
-  client: string
-  year: string
-  title: Record<Lang, string>
-  summary: Record<Lang, string>
-  tags: string[]
-  href?: string
-  image: string
-  /** Grote kaart in de bento-grid: vult twee kolommen. */
-  featured?: boolean
-  /** Zet een label op de kaart, bv. voor werk dat nog loopt. */
-  status?: Record<Lang, string>
-}
-
+// Startinhoud voor de store: bij de eerste keer draaien wordt deze lijst naar
+// projects.json geschreven, daarna beheer je werk via /admin.
+//
 // Screenshots staan in /public/work/. Vervang ze gerust door mooiere: ik heb
 // ze in het browservenster gemaakt, dus het is de bovenkant van de pagina.
 export const projects: Project[] = [

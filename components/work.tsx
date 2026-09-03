@@ -1,10 +1,12 @@
 import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import type { Dict, Lang } from "@/content/dictionaries"
-import { projects } from "@/content/projects"
+import { getProjects } from "@/lib/data"
 import { SectionHeading } from "@/components/section-heading"
 
-export function Work({ dict, lang }: { dict: Dict; lang: Lang }) {
+export async function Work({ dict, lang }: { dict: Dict; lang: Lang }) {
+  const projects = await getProjects()
+
   // Een smalle kaart die alleen op zijn rij overblijft laat een gat vallen.
   // De laatste in dat geval ook breed maken houdt de grid dicht, ongeacht
   // hoeveel projecten er staan.
@@ -49,7 +51,7 @@ export function Work({ dict, lang }: { dict: Dict; lang: Lang }) {
                 >
                   <Image
                     src={project.image}
-                    alt=""
+                    alt={`${project.client} — ${project.title[lang]}`}
                     width={wide ? 1600 : 1200}
                     height={wide ? 1000 : 750}
                     // Zonder muis is er geen scroll-onthulling: grijs zou daar

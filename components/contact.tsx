@@ -1,8 +1,8 @@
-import type { Dict } from "@/content/dictionaries"
+import type { Dict, Lang } from "@/content/dictionaries"
 import { ContactForm } from "@/components/contact-form"
 import { SITE } from "@/lib/site"
 
-export function Contact({ dict }: { dict: Dict }) {
+export function Contact({ dict, lang }: { dict: Dict; lang: Lang }) {
   return (
     <section id="contact" className="section-y scroll-mt-14">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -30,7 +30,11 @@ export function Contact({ dict }: { dict: Dict }) {
           </div>
 
           <div className="md:col-span-7">
-            <ContactForm dict={dict.contact} />
+            <ContactForm
+              dict={dict.contact}
+              lang={lang}
+              privacyLabel={dict.legal.privacy}
+            />
           </div>
         </div>
       </div>

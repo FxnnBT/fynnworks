@@ -1,6 +1,7 @@
 import { Check } from "lucide-react"
 import type { Dict } from "@/content/dictionaries"
 import { SectionHeading } from "@/components/section-heading"
+import { VAT_SUFFIX } from "@/lib/site"
 
 export function Services({ dict }: { dict: Dict }) {
   return (
@@ -9,6 +10,7 @@ export function Services({ dict }: { dict: Dict }) {
         <SectionHeading
           eyebrow={dict.services.eyebrow}
           title={dict.services.title}
+          lead={dict.services.vatNote}
         />
 
         {/* Rijen in plaats van drie gelijke kaarten: het prijsverschil is de
@@ -32,7 +34,15 @@ export function Services({ dict }: { dict: Dict }) {
                 <h3 className="font-display text-3xl leading-none">
                   {item.name}
                 </h3>
-                <p className="mt-3 font-mono text-sm text-warm">{item.price}</p>
+                <p className="mt-3 font-mono text-sm text-warm">
+                  {item.price}
+                  {/* Alleen achter een echt bedrag: "op aanvraag excl. btw"
+                      slaat nergens op, en de wet vraagt de vermelding ook
+                      alleen daar waar een prijs staat. */}
+                  {/\d/.test(item.price) ? (
+                    <span className="text-muted-foreground"> {VAT_SUFFIX}</span>
+                  ) : null}
+                </p>
               </div>
 
               <p className="text-muted-foreground md:col-span-4">

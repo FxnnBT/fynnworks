@@ -207,3 +207,95 @@
 @utility section-y {
   padding-block: var(--space-section);
 }
+
+/* Opmaak voor de juridische pagina's. Die komen als HTML uit marked, dus daar
+   valt geen className op te hangen — vandaar afstammelingen in plaats van
+   utilities. Geen @tailwindcss/typography: die brengt een eigen lichte
+   kleurenset mee die je hier toch regel voor regel zou overschrijven. */
+@utility prose-legal {
+  color: var(--muted-foreground);
+  line-height: 1.7;
+
+  & h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-section);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    color: var(--foreground);
+  }
+  /* Artikelkoppen. Ruim boven, krap onder: de kop hoort bij de tekst eronder,
+     niet bij het artikel erboven. */
+  & h2 {
+    margin-block: 3rem 1rem;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    line-height: 1.15;
+    color: var(--foreground);
+  }
+  & h3 {
+    margin-block: 2rem 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+  & p,
+  & ul,
+  & ol,
+  & table {
+    margin-block: 1rem;
+  }
+  & ul,
+  & ol {
+    padding-left: 1.25rem;
+  }
+  & ul {
+    list-style: disc;
+  }
+  & ol {
+    list-style: decimal;
+  }
+  & li {
+    margin-block: 0.35rem;
+  }
+  & strong {
+    font-weight: 600;
+    color: var(--foreground);
+  }
+  & a {
+    color: var(--warm);
+    text-underline-offset: 3px;
+    text-decoration: underline;
+  }
+  & hr {
+    margin-block: 2.5rem;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+  & code {
+    font-family: var(--font-geist-mono);
+    font-size: 0.875em;
+    color: var(--foreground);
+  }
+  /* De cookietabel in de privacyverklaring is de enige tabel op de site. Op een
+     smal scherm mag hij scrollen in plaats van de pagina op te rekken. */
+  & table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  & th,
+  & td {
+    padding: 0.6rem 1rem 0.6rem 0;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  & th {
+    font-weight: 600;
+    color: var(--foreground);
+  }
+  & em {
+    font-style: italic;
+  }
+}

@@ -7,7 +7,7 @@ export function isLang(value: string): value is Lang {
 
 const nl = {
   meta: {
-    title: "fynnworks — websites die verkopen",
+    title: "fynnworks — websites die werk opleveren",
     description:
       "Ik ontwerp en bouw snelle, eigenzinnige websites voor ondernemers. Van landingspagina tot volledige bedrijfssite.",
   },
@@ -26,13 +26,16 @@ const nl = {
     eyebrow: "Webdesign & development",
     title: "Websites die\nwerk opleveren.",
     lead:
-      "Geen template die iedereen al heeft. Ik ontwerp en bouw sites die snel laden, goed vindbaar zijn en er uitzien alsof je er om geeft.",
+      "Geen template die iedereen al heeft. Ik ontwerp en bouw websites die snel laden, goed vindbaar zijn, er uitzien alsof je er om geeft en werk opleveren.",
     primary: "Start een project",
     secondary: "Bekijk werk",
   },
   services: {
     eyebrow: "Diensten",
     title: "Wat ik voor je bouw",
+    // Verplicht bij een prijsvermelding: consumenten moeten weten wat ze
+    // uiteindelijk betalen. Het achtervoegsel zelf staat in lib/site.ts.
+    vatNote: "Richtprijzen, exclusief btw. Consumenten betalen inclusief btw.",
     items: [
       {
         name: "Landingspagina",
@@ -62,6 +65,43 @@ const nl = {
     title: "Eerder gemaakt",
     lead: "Een greep uit recente projecten.",
     visit: "Bekijk site",
+  },
+  reviews: {
+    eyebrow: "Reviews",
+    title: "Wat klanten zeggen",
+    lead: "Zelf samengewerkt? Laat gerust weten hoe het ging.",
+    empty: "Nog geen reviews. Wees de eerste.",
+    general: "Algemeen",
+    // Verplicht sinds 2022 (art. 6:193b/e BW): wie reviews toont moet zeggen
+    // of en hoe hij controleert dat ze van echte klanten komen.
+    verified:
+      "Elke review lees ik zelf na en ik controleer of de inzender echt klant is geweest. Reviews die daar niet aan voldoen plaats ik niet. Ik betaal niet voor reviews en pas geplaatste teksten niet aan.",
+    privacyNote:
+      "Je naam en bedrijf komen zichtbaar op de site te staan zodra ik de review goedkeur.",
+    open: "Schrijf een review",
+    name: "Naam",
+    namePlaceholder: "Jouw naam",
+    company: "Bedrijf",
+    companyPlaceholder: "Optioneel",
+    rating: "Beoordeling",
+    stars: "sterren",
+    project: "Over welk project?",
+    projectGeneral: "Algemeen, niet één project",
+    text: "Je review",
+    textPlaceholder: "Hoe ging de samenwerking, en wat leverde het op?",
+    submit: "Insturen",
+    sending: "Insturen…",
+    success: "Bedankt. Je review komt op de site zodra ik hem heb bekeken.",
+    errors: {
+      invalid: "Controleer je gegevens en probeer het opnieuw.",
+      rate: "Je hebt net al iets ingestuurd. Probeer het later nog eens.",
+      server: "Insturen mislukte. Probeer het later nog eens.",
+    },
+    fieldErrors: {
+      name: "Vul je naam in, minstens twee tekens.",
+      rating: "Kies een aantal sterren.",
+      text: "Schrijf iets meer, minstens tien tekens.",
+    },
   },
   process: {
     eyebrow: "Werkwijze",
@@ -153,11 +193,28 @@ const nl = {
       email: "Dit lijkt geen geldig e-mailadres.",
       message: "Schrijf iets meer, minstens tien tekens.",
     },
+    // AVG art. 13 vereist informeren op het moment dat je gegevens vraagt,
+    // niet pas ergens onderaan de pagina.
+    privacyNote: "Je gegevens gebruik ik alleen om op je bericht te reageren.",
     directLabel: "Liever direct mailen?",
   },
   footer: {
     tagline: "Websites voor ondernemers. Gebouwd in Nederland.",
     rights: "Alle rechten voorbehouden.",
+    // Art. 3:15d BW en de Dienstenwet: KvK-nummer en btw-id moeten vindbaar
+    // zijn op de site zelf, niet alleen op de factuur.
+    kvk: "KvK",
+    vat: "Btw-id",
+    privacy: "Privacyverklaring",
+    terms: "Algemene voorwaarden",
+  },
+  legal: {
+    back: "Terug naar de site",
+    // Alleen zichtbaar op /en/terms: de voorwaarden bestaan bewust maar in één
+    // taal, en dan moet je zeggen welke dat is en waarom.
+    termsNotice: "",
+    privacy: "Privacyverklaring",
+    terms: "Algemene voorwaarden",
   },
   langSwitch: { label: "Taal", other: "English" },
 }
@@ -166,7 +223,7 @@ export type Dict = typeof nl
 
 const en: Dict = {
   meta: {
-    title: "fynnworks — websites that sell",
+    title: "fynnworks — websites that earn their keep",
     description:
       "I design and build fast, opinionated websites for small businesses. From landing page to full company site.",
   },
@@ -185,13 +242,14 @@ const en: Dict = {
     eyebrow: "Web design & development",
     title: "Websites that\nearn their keep.",
     lead:
-      "Not the template everyone else already has. I design and build sites that load fast, rank well, and look like you care.",
+      "Not the template everyone else already has. I design and build websites that load fast, rank well, look like you care and earn their keep.",
     primary: "Start a project",
     secondary: "See the work",
   },
   services: {
     eyebrow: "Services",
     title: "What I build for you",
+    vatNote: "Indicative prices, excluding VAT. Consumers pay VAT-inclusive prices.",
     items: [
       {
         name: "Landing page",
@@ -221,6 +279,41 @@ const en: Dict = {
     title: "Recently shipped",
     lead: "A selection of recent projects.",
     visit: "Visit site",
+  },
+  reviews: {
+    eyebrow: "Reviews",
+    title: "What clients say",
+    lead: "Worked with me? Feel free to say how it went.",
+    empty: "No reviews yet. Be the first.",
+    general: "General",
+    verified:
+      "I read every review myself and verify that the sender was in fact a client. Reviews that fail that check are not published. I do not pay for reviews and I do not edit published ones.",
+    privacyNote:
+      "Your name and company become publicly visible on the site once I approve the review.",
+    open: "Write a review",
+    name: "Name",
+    namePlaceholder: "Your name",
+    company: "Company",
+    companyPlaceholder: "Optional",
+    rating: "Rating",
+    stars: "stars",
+    project: "Which project?",
+    projectGeneral: "General, not one project",
+    text: "Your review",
+    textPlaceholder: "How did the collaboration go, and what did it deliver?",
+    submit: "Send",
+    sending: "Sending…",
+    success: "Thanks. Your review goes live once I have read it.",
+    errors: {
+      invalid: "Please check your details and try again.",
+      rate: "You just sent something. Please try again later.",
+      server: "Sending failed. Please try again later.",
+    },
+    fieldErrors: {
+      name: "Enter your name, at least two characters.",
+      rating: "Pick a number of stars.",
+      text: "Write a little more, at least ten characters.",
+    },
   },
   process: {
     eyebrow: "Process",
@@ -309,11 +402,23 @@ const en: Dict = {
       email: "This does not look like a valid email address.",
       message: "Write a little more, at least ten characters.",
     },
+    privacyNote: "I use your details only to reply to your message.",
     directLabel: "Rather email directly?",
   },
   footer: {
     tagline: "Websites for small businesses. Built in the Netherlands.",
     rights: "All rights reserved.",
+    kvk: "KvK",
+    vat: "VAT",
+    privacy: "Privacy statement",
+    terms: "Terms and conditions",
+  },
+  legal: {
+    back: "Back to the site",
+    termsNotice:
+      "These terms are written in Dutch and governed by Dutch law. The Dutch text below is the binding version; no translation takes its place. Happy to walk you through it in English — just ask.",
+    privacy: "Privacy statement",
+    terms: "Terms and conditions",
   },
   langSwitch: { label: "Language", other: "Nederlands" },
 }

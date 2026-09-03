@@ -23,6 +23,10 @@ PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
 ReadWritePaths=/srv/fynnworks/.next
+# Projecten, reviews en uploads: systemd maakt /var/lib/fynnworks aan, zet
+# $STATE_DIRECTORY, en houdt 'm schrijfbaar ondanks ProtectSystem=strict. Ligt
+# buiten /srv/fynnworks, dus de tar-overdracht en een rebuild raken 'm niet.
+StateDirectory=fynnworks
 
 [Install]
 WantedBy=multi-user.target

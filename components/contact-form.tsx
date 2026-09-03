@@ -4,15 +4,27 @@ import { useActionState, useEffect, useRef } from "react"
 import { ArrowRight, Check, TriangleAlert } from "lucide-react"
 import { sendContact } from "@/app/actions"
 import type { ContactField, ContactState } from "@/lib/contact"
-import type { Dict } from "@/content/dictionaries"
+import Link from "next/link"
+import type { Dict, Lang } from "@/content/dictionaries"
+import { LEGAL } from "@/lib/legal"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
-const fieldClass =
+// Ook gebruikt door het reviewformulier: één onderstreepte veldstijl voor de
+// hele site.
+export const fieldClass =
   "h-12 rounded-none border-0 border-b border-line bg-transparent px-0 text-base focus-visible:border-warm focus-visible:ring-0 aria-invalid:border-destructive dark:bg-transparent"
 
-export function ContactForm({ dict }: { dict: Dict["contact"] }) {
+export function ContactForm({
+  dict,
+  lang,
+  privacyLabel,
+}: {
+  dict: Dict["contact"]
+  lang: Lang
+  privacyLabel: string
+}) {
   const [state, formAction, pending] = useActionState<ContactState, FormData>(
     sendContact,
     { status: "idle" },
@@ -158,7 +170,9 @@ export function ContactForm({ dict }: { dict: Dict["contact"] }) {
         ) : null}
       </div>
 
-      <div>
+      {/* AVG art. 13: informeren op het moment dat je de gegevens vraagt.
+          Vandaar hier, naast de knop, en niet alleen onderaan de pagina. */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <button
           type="submit"
           disabled={pending}
@@ -167,6 +181,15 @@ export function ContactForm({ dict }: { dict: Dict["contact"] }) {
           {pending ? dict.sending : dict.submit}
           <ArrowRight className="size-4 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1" />
         </button>
+        <p className="text-xs text-muted-foreground">
+          {dict.privacyNote}{" "}
+          <Link
+            href={`/${lang}/${LEGAL.privacy.slug[lang]}`}
+            className="underline underline-offset-3 transition-colors hover:text-foreground"
+          >
+            {privacyLabel}
+          </Link>
+        </p>
       </div>
     </form>
   )

@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# schrijfbare gegevens (projecten, reviews, uploads) - lokale tegenhanger van
+# /var/lib/fynnworks op de Pi
+/data/
+
 # vercel
 .vercel
 

@@ -7,7 +7,7 @@ NL/EN, contactformulier via SMTP. Draait als één systemd-service op een Raspbe
 
 ```bash
 npm install
-cp .env.example .env.local   # SMTP-gegevens invullen
+cp .env.example .env.local   # SMTP-gegevens en ADMIN_PASSWORD invullen
 npm run dev                  # http://localhost:3000 → /nl
 npm test                     # validatie + rate limit
 ```
@@ -19,7 +19,9 @@ Zelf teksten, prijzen of projecten wijzigen: zie **[AANPASSEN.md](AANPASSEN.md)*
 | Pad | Inhoud |
 |---|---|
 | `content/dictionaries.ts` | Alle teksten, NL en EN naast elkaar |
-| `content/projects.ts` | Je portfolio-items (nu placeholders) |
+| `content/projects.ts` | Startlijst portfolio-items; daarna beheer je ze op `/admin` |
+| `lib/store.ts` | Schrijfbare opslag: projecten, reviews, uploads |
+| `app/admin/` | Beheerpagina: werk toevoegen, reviews goedkeuren |
 | `lib/site.ts` | Naam, domein, zichtbaar e-mailadres |
 | `app/actions.ts` | Server Action die de mail verstuurt |
 | `lib/contact.ts` | Validatie + rate limit |
@@ -28,11 +30,41 @@ Zelf teksten, prijzen of projecten wijzigen: zie **[AANPASSEN.md](AANPASSEN.md)*
 Nieuwe shadcn-componenten toevoegen: `npx shadcn@latest add <naam>` — die komen
 in `components/ui/`, waar de rest ook staat.
 
-## Eigen projecten invullen
+## Beheerpagina
 
-Zet screenshots in `public/work/` en verwijs ernaar vanuit `content/projects.ts`
-(`image: "/work/klantnaam.jpg"`). Lever ze aan op max ~1600px breed: de
-Next-beeldoptimalisatie staat uit, zodat de Pi geen CPU aan schalen kwijt is.
+`https://fynnworks.nl/admin` — één wachtwoordveld, `ADMIN_PASSWORD` uit
+`/etc/fynnworks.env`. Het cookie blijft 30 dagen geldig; wachtwoord wijzigen
+maakt elk uitstaand cookie meteen ongeldig. Vijf mislukte pogingen per uur per
+IP, daarna een uur op slot. De pagina staat op `noindex` en in `robots.txt`.
+
+Daar doe je twee dingen:
+
+- **Werk toevoegen of weghalen.** Screenshot uploaden mag rechtstreeks; lever
+  hem aan op max ~1600px breed en onder 3 MB, want de beeldoptimalisatie staat
+  uit (de Pi schaalt niets). Uploads komen in `/var/lib/fynnworks/uploads/` en
+  worden uitgeserveerd door `app/uploads/[file]/route.ts` — niet uit `public/`,
+  want dat leest Next alleen bij het opstarten in.
+- **Reviews goedkeuren.** Bezoekers laten er een achter onderaan de
+  werksectie. Niets komt op de site voordat jij op goedkeuren drukt. Reviews
+  die op de spamheuristiek aanslaan krijgen een `spam?`-markering, maar worden
+  nooit geweigerd — precies zoals het contactformulier `[spam?]` in het
+  onderwerp zet.
+
+### Waar die gegevens staan
+
+`/var/lib/fynnworks/` — `projects.json`, `reviews.json` en `uploads/`. systemd
+maakt en beheert die map (`StateDirectory=fynnworks` in
+`deploy/fynnworks.service`); zonder die regel is er niets schrijfbaar, want de
+unit draait met `ProtectSystem=strict`. Lokaal is het `./data/`, gitignored.
+
+De eerste keer dat de site draait wordt `content/projects.ts` naar
+`projects.json` geschreven. Daarna is dat bestand de bron: wijzigingen in de
+code veranderen niets meer aan wat er op de site staat.
+
+> **Back-up is handwerk.** Die map ligt buiten `/srv/fynnworks`, dus de
+> tar-overdracht en een rebuild raken hem niet — maar hij gaat ook nooit mee
+> naar je pc. Zet je de Pi opnieuw op, dan ben je de reviews kwijt:
+> `scp -r <gebruiker>@<pi-host>:/var/lib/fynnworks ./backup` zo nu en dan.
 
 ## Uitrollen op de Pi
 
@@ -88,6 +120,7 @@ SMTP_PORT=587
 SMTP_USER=info@fynnworks.nl
 SMTP_PASS=<wachtwoord van de mailbox>
 CONTACT_TO=info@fynnworks.nl
+ADMIN_PASSWORD=<wachtwoord voor /admin>
 ```
 
 `mailout.hostnet.nl` werkt niet van buiten Hostnets netwerk — die timet out op

@@ -6,7 +6,7 @@ componenten open te maken om tekst, prijzen of projecten te wijzigen.
 | Bestand | Waarvoor |
 |---|---|
 | `content/dictionaries.ts` | **Alle teksten**, Nederlands en Engels |
-| `content/projects.ts` | Je portfolio-items |
+| `content/projects.ts` | Startlijst portfolio-items — daarna beheer je ze op `/admin` |
 | `lib/site.ts` | Naam, domein, zichtbaar e-mailadres |
 | `.env.local` | SMTP-gegevens (niet in git) |
 
@@ -22,11 +22,13 @@ componenten open te maken om tekst, prijzen of projecten te wijzigen.
       domein, `.com` stuurt daarheen door — zie README). `email` staat nog op
       `hallo@fynnworks.nl`; zet daar je echte mailbox neer.
 - [ ] **`.env.local` aanmaken** — kopieer `.env.example` en vul je SMTP-gegevens
-      in. Zonder dit komt er geen mail aan.
-- [ ] **`content/projects.ts`** — Marcel Hensema en Beldi Amsterdam staan erin
-      met echte teksten. Controleer wel het **jaartal** bij Marcel Hensema (staat
-      nu op 2025) en de omschrijvingen: die heb ik van de sites afgelezen, jij
-      weet beter wat je er precies voor ze gedaan hebt.
+      in. Zonder dit komt er geen mail aan. Zet er meteen een
+      `ADMIN_PASSWORD` in: daarmee kom je op `/admin`.
+- [ ] **De twee projecten** — Marcel Hensema en Beldi Amsterdam staan erin met
+      echte teksten. Controleer het **jaartal** bij Marcel Hensema (staat nu op
+      2025) en de omschrijvingen: die heb ik van de sites afgelezen, jij weet
+      beter wat je er precies voor ze gedaan hebt. Wijzigen doe je door hem op
+      `/admin` weg te halen en opnieuw toe te voegen.
 - [ ] **`public/work/*.jpg`** — de twee screenshots heb ik uit het browservenster
       gemaakt. Bruikbaar, maar eigen beelden zijn beter (zie punt 3).
 - [ ] **`content/dictionaries.ts` → `faq.items`** — de zes vragen en antwoorden
@@ -79,7 +81,7 @@ title: "Websites die\nwerk opleveren.",
 | Zinnetje rechts ernaast | `work.lead` |
 | Link "Bekijk site" op elke kaart | `work.visit` |
 
-De kaarten zelf staan in `content/projects.ts` — zie punt 3.
+De kaarten zelf beheer je op `/admin` — zie punt 3.
 
 ### Diensten
 
@@ -148,7 +150,16 @@ tekens.
 
 ## 3. Je eigen projecten erin zetten
 
-Open `content/projects.ts`. Elk project ziet er zo uit:
+**Het makkelijkste gaat dit via `/admin`.** Log in met je `ADMIN_PASSWORD`,
+vul het formulier onderaan in en upload de screenshot — geen code, geen
+opnieuw uitrollen. Daar haal je projecten ook weer weg.
+
+`content/projects.ts` hieronder is alleen nog de **startlijst**: die wordt de
+allereerste keer dat de site draait naar de opslag geschreven, en daarna kijkt
+de site er niet meer naar. Wijzig je hem later alsnog, dan verandert er niets
+op de site — gebruik `/admin`.
+
+Voor de volledigheid, zo ziet een project eruit:
 
 ```ts
 {
@@ -189,6 +200,10 @@ Een paar dingen om te weten:
 - **`href` weglaten** mag — de kaart wordt dan gewoon niet klikbaar. Handig
   voor werk dat offline is of onder NDA valt.
 - Aantal projecten is vrij: haal er weg of voeg toe, de grid vult zichzelf.
+- **Uploads via `/admin`** komen niet in `public/work/` maar in
+  `/var/lib/fynnworks/uploads/` op de Pi, met een `/uploads/…`-adres. Dat moet:
+  Next leest `public/` alleen bij het opstarten in, dus een verse upload zou
+  daar 404 geven tot je de service herstart.
 
 De beelden staan bewust in zwart-wit en kleuren in als je eroverheen gaat. Dat
 zit in `components/work.tsx` (`grayscale` / `group-hover:grayscale-0`) als je
