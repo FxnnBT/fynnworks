@@ -12,6 +12,7 @@ import {
   readJson,
   reviewSchema,
   saveUpload,
+  uploadPath,
   writeJson,
 } from "./store.ts"
 
@@ -134,6 +135,21 @@ test("upload krijgt een hashnaam die het patroon haalt", async () => {
   )
   assert.equal(again, url)
   assert.deepEqual(await fs.readFile(path.join(dir, "uploads", name)), PNG)
+})
+
+test("briefing-upload gaat naar de privémap, niet de publieke", async () => {
+  const url = await saveUpload(
+    new File([PNG], "x.png", { type: "image/png" }),
+    "brief",
+  )
+  const name = url.replace("/admin/uploads/", "")
+  assert.match(name, UPLOAD_NAME)
+  assert.equal(url.startsWith("/admin/uploads/"), true)
+  // Andere map dan de publieke, en een URL die langs de login moet. Dezelfde
+  // inhoud levert in beide klassen dezelfde bestandsnaam op — dat botst niet,
+  // juist omdat de mappen gescheiden zijn.
+  assert.deepEqual(await fs.readFile(path.join(dir, "brief-uploads", name)), PNG)
+  assert.notEqual(uploadPath(name, "brief"), uploadPath(name))
 })
 
 test("upload weigert een verkeerd type en te grote bestanden", async () => {

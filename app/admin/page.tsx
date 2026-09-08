@@ -272,6 +272,10 @@ function BriefCard({ brief }: { brief: Brief }) {
                   alt=""
                   width={96}
                   height={96}
+                  // De optimizer haalt de bron zelf op, zonder jouw cookie: die
+                  // request zou op de login stuklopen. En /_next/image zou het
+                  // privébestand juist wél aan iedereen serveren. Dus rauw.
+                  unoptimized
                   className="size-24 rounded-lg border border-line object-cover transition-opacity hover:opacity-80"
                 />
               </a>

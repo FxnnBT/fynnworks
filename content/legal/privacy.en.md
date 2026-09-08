@@ -16,9 +16,9 @@ fynnworks is the data controller for the personal data processed through this we
 
 ## 1. The short version
 
-This site collects as little as possible. There is no analytics, no tracking pixels, no ad networks and no social media embeds. No profile of you is built and no data goes to third parties for marketing. Only what you type into a form ever leaves your browser.
+This site collects as little as possible. There is no analytics, no tracking pixels, no ad networks and no social media embeds. No profile of you is built and no data goes to third parties for marketing. Only what you enter or attach in a form ever leaves your browser.
 
-That is also why you see no cookie banner: no cookie requiring consent is placed. See section 5.
+That is also why you see no cookie banner: no cookie requiring consent is placed. See section 6.
 
 ---
 
@@ -52,7 +52,27 @@ That is also why you see no cookie banner: no cookie requiring consent is placed
 
 ---
 
-## 4. Server logs and hosting
+## 4. Briefing form
+
+**What is collected:** your name, email address, company name and phone number, the answers you give to the questions, and any images you attach.
+
+**Why:** to understand what you need, to be able to make a proposal, and to carry out the project.
+
+**Legal basis:** performance of a contract or steps prior to it (Art. 6(1)(b) GDPR).
+
+**Where it goes:** the briefing is stored on my own server in the Netherlands and I receive a notification email about it. That stored version is the source of truth; nothing goes to an external form or CRM platform.
+
+**Images:** these sit behind the admin login. They are not publicly retrievable and are not published on the site, unless we agree that they belong with the work.
+
+**How long:** the same as for the contact form. If the briefing does not lead to a project, it is kept for at most two years. If it does, seven years, because Dutch tax law requires that retention period for business records.
+
+**Access:** the form is reachable only through a personal invitation link you receive from me. There is no public briefing form.
+
+**Abuse protection:** as with the contact form, a hidden field, a measurement of how long you took, and a per-IP-address limit. That IP address is used only for the limit and is not stored with the briefing.
+
+---
+
+## 5. Server logs and hosting
 
 The site runs on my own hardware in the Netherlands. There is no hosting provider with access to the data on my behalf.
 
@@ -62,7 +82,7 @@ Email is delivered through an SMTP provider. That provider processes the content
 
 ---
 
-## 5. Cookies
+## 6. Cookies
 
 There is exactly one cookie on this site:
 
@@ -78,7 +98,7 @@ No analytics, functional or third-party marketing cookies are placed, and nothin
 
 ---
 
-## 6. Recipients and transfers
+## 7. Recipients and transfers
 
 Data is never sold, rented or shared for commercial purposes. It is shared only where unavoidable:
 
@@ -90,7 +110,7 @@ No data is transferred outside the European Economic Area, and there is no autom
 
 ---
 
-## 7. Your rights
+## 8. Your rights
 
 You have the right to access your data, to have it corrected or erased, to restrict processing, to object to processing, and to receive your data in a commonly used format. Where you have given consent, you may withdraw it at any time; that does not affect the lawfulness of processing before withdrawal.
 
@@ -100,12 +120,12 @@ If you believe I am not handling your request properly, you can lodge a complain
 
 ---
 
-## 8. Security
+## 9. Security
 
-All traffic runs over HTTPS. The admin page is password-protected and set to `noindex`. Login attempts are rate-limited. Data sits on my own hardware, not with a third party.
+All traffic runs over HTTPS. The admin page is password-protected and set to `noindex`. Login attempts are rate-limited. Data sits on my own hardware, not with a third party. Anything clients upload in the briefing is retrievable only by the signed-in administrator.
 
 ---
 
-## 9. Changes
+## 10. Changes
 
 This statement may change when the site or the way I work changes. The date at the top shows when that last happened.

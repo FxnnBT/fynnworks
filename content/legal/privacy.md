@@ -16,9 +16,9 @@ fynnworks is verwerkingsverantwoordelijke voor de gegevens die via deze website 
 
 ## 1. Kort samengevat
 
-Deze site verzamelt zo min mogelijk. Er staat geen analytics op, geen trackingpixels, geen advertentienetwerken en geen social-media-embeds. Er wordt geen enkel profiel van je opgebouwd en er gaan geen gegevens naar derden voor marketingdoeleinden. Alleen wat je zelf in een formulier typt, verlaat je browser.
+Deze site verzamelt zo min mogelijk. Er staat geen analytics op, geen trackingpixels, geen advertentienetwerken en geen social-media-embeds. Er wordt geen enkel profiel van je opgebouwd en er gaan geen gegevens naar derden voor marketingdoeleinden. Alleen wat je zelf in een formulier invult of meestuurt, verlaat je browser.
 
-Om die reden zie je hier ook geen cookiebanner: er wordt geen cookie geplaatst waarvoor toestemming nodig is. Zie artikel 5.
+Om die reden zie je hier ook geen cookiebanner: er wordt geen cookie geplaatst waarvoor toestemming nodig is. Zie artikel 6.
 
 ---
 
@@ -52,7 +52,27 @@ Om die reden zie je hier ook geen cookiebanner: er wordt geen cookie geplaatst w
 
 ---
 
-## 4. Serverlogs en hosting
+## 4. Briefingformulier
+
+**Welke gegevens:** je naam, e-mailadres, bedrijfsnaam en telefoonnummer, de antwoorden die je op de vragen geeft, en de afbeeldingen die je meestuurt.
+
+**Waarom:** om te begrijpen wat je nodig hebt, een voorstel te kunnen doen en de opdracht uit te voeren.
+
+**Grondslag:** uitvoering van of aanloop naar een overeenkomst (art. 6 lid 1 sub b AVG).
+
+**Waar het heen gaat:** de briefing wordt opgeslagen op mijn eigen server in Nederland en ik krijg er een notificatiemail van. Die opgeslagen versie is de bron; er gaat niets naar een extern formulier- of CRM-platform.
+
+**Afbeeldingen:** die staan achter de beheerderslogin. Ze zijn niet publiek opvraagbaar en komen niet op de site te staan, tenzij we afspreken dat ze bij het werk horen.
+
+**Hoe lang:** hetzelfde als bij het contactformulier. Leidt de briefing niet tot een opdracht, dan bewaar ik hem maximaal twee jaar. Leidt hij er wel toe, dan zeven jaar, omdat de Belastingdienst dat voor de administratie voorschrijft.
+
+**Toegang:** het formulier is alleen te bereiken via een persoonlijke uitnodigingslink die je van mij krijgt. Er is geen openbaar briefingformulier.
+
+**Bescherming tegen misbruik:** net als bij het contactformulier een verborgen veld, een meting van de invultijd en een begrenzing per IP-adres. Dat IP-adres wordt alleen voor die begrenzing gebruikt en wordt niet bij de briefing bewaard.
+
+---
+
+## 5. Serverlogs en hosting
 
 De site draait op eigen hardware in Nederland. Er is geen hostingpartij die namens mij toegang heeft tot de gegevens.
 
@@ -62,7 +82,7 @@ E-mail loopt via een SMTP-provider. Die verwerkt de inhoud van het contactformul
 
 ---
 
-## 5. Cookies
+## 6. Cookies
 
 Er staat één cookie op deze site:
 
@@ -78,7 +98,7 @@ Er worden geen analytische, functionele of marketingcookies van derden geplaatst
 
 ---
 
-## 6. Doorgifte en ontvangers
+## 7. Doorgifte en ontvangers
 
 Gegevens worden niet verkocht, verhuurd of gedeeld voor commerciële doeleinden. Ze worden alleen gedeeld als het niet anders kan:
 
@@ -90,7 +110,7 @@ Er vindt geen doorgifte plaats naar landen buiten de Europese Economische Ruimte
 
 ---
 
-## 7. Je rechten
+## 8. Je rechten
 
 Je hebt het recht om je gegevens in te zien, te laten corrigeren, te laten verwijderen, de verwerking te laten beperken, bezwaar te maken tegen de verwerking, en je gegevens in een gangbaar bestandsformaat te ontvangen. Heb je toestemming gegeven, dan mag je die op elk moment intrekken; dat raakt de rechtmatigheid van wat daarvoor gebeurde niet.
 
@@ -100,12 +120,12 @@ Vind je dat ik je verzoek niet goed afhandel, dan kun je een klacht indienen bij
 
 ---
 
-## 8. Beveiliging
+## 9. Beveiliging
 
-Al het verkeer loopt over HTTPS. De beheerpagina is met een wachtwoord afgeschermd en staat op `noindex`. Het aantal inlogpogingen is begrensd. Gegevens staan op eigen hardware, niet bij een derde partij.
+Al het verkeer loopt over HTTPS. De beheerpagina is met een wachtwoord afgeschermd en staat op `noindex`. Het aantal inlogpogingen is begrensd. Gegevens staan op eigen hardware, niet bij een derde partij. Wat klanten in de briefing uploaden is alleen voor de ingelogde beheerder op te vragen.
 
 ---
 
-## 9. Wijzigingen
+## 10. Wijzigingen
 
 Deze verklaring kan wijzigen wanneer de site of de werkwijze verandert. De datum bovenaan geeft aan wanneer dat voor het laatst gebeurde.

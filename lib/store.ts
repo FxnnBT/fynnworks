@@ -181,21 +181,45 @@ export const MAX_UPLOAD_BYTES = 3 * 1024 * 1024
  */
 export const UPLOAD_NAME = /^[a-f0-9]{16}\.(jpg|png|webp|avif)$/
 
-export function uploadPath(name: string): string {
-  return path.join(/*turbopackIgnore: true*/ dataDir(), "uploads", name)
+/**
+ * Twee vertrouwensklassen, twee mappen. Projectafbeeldingen staan publiek op de
+ * site; wat een klant in de briefing uploadt is privé. Dat onderscheid zit in
+ * het pad en niet in een aparte lijst, zodat "mag dit bestand naar buiten?" niet
+ * van losse boekhouding afhangt die uit de pas kan lopen.
+ */
+export type UploadKind = "public" | "brief"
+
+const UPLOAD_DIR: Record<UploadKind, string> = {
+  public: "uploads",
+  brief: "brief-uploads",
 }
 
-/** Slaat een afbeelding op onder zijn eigen hash en geeft het publieke pad. */
-export async function saveUpload(file: File): Promise<string> {
+/** De privémap wordt geserveerd door een route die eerst op de login controleert. */
+const UPLOAD_URL: Record<UploadKind, string> = {
+  public: "/uploads",
+  brief: "/admin/uploads",
+}
+
+export function uploadPath(name: string, kind: UploadKind = "public"): string {
+  return path.join(/*turbopackIgnore: true*/ dataDir(), UPLOAD_DIR[kind], name)
+}
+
+/** Slaat een afbeelding op onder zijn eigen hash en geeft het pad waarop hij te halen is. */
+export async function saveUpload(
+  file: File,
+  kind: UploadKind = "public",
+): Promise<string> {
   const ext = IMAGE_EXT[file.type]
   if (!ext) throw new Error("Alleen JPG, PNG, WebP of AVIF.")
   if (file.size > MAX_UPLOAD_BYTES) throw new Error("Afbeelding is groter dan 3 MB.")
 
   const bytes = Buffer.from(await file.arrayBuffer())
   // Inhoudshash als naam: twee keer dezelfde afbeelding uploaden levert één
-  // bestand op, en de URL mag daardoor onbeperkt gecachet worden.
+  // bestand op, en de naam verandert nooit zolang de inhoud dat niet doet.
   const name = `${createHash("sha256").update(bytes).digest("hex").slice(0, 16)}.${ext}`
-  await fs.mkdir(path.join(/*turbopackIgnore: true*/ dataDir(), "uploads"), { recursive: true })
-  await fs.writeFile(uploadPath(name), bytes)
-  return `/uploads/${name}`
+  await fs.mkdir(path.join(/*turbopackIgnore: true*/ dataDir(), UPLOAD_DIR[kind]), {
+    recursive: true,
+  })
+  await fs.writeFile(uploadPath(name, kind), bytes)
+  return `${UPLOAD_URL[kind]}/${name}`
 }

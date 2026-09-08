@@ -197,7 +197,7 @@ export async function submitBrief(
 
   const images: string[] = []
   try {
-    for (const file of files) images.push(await saveUpload(file))
+    for (const file of files) images.push(await saveUpload(file, "brief"))
   } catch (error) {
     // saveUpload weigert een verkeerd formaat of een te groot bestand. Dat is
     // iets wat de bezoeker zelf kan oplossen, dus die melding mag hij zien.
