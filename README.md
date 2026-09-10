@@ -201,9 +201,8 @@ Cloudflare rechtstreeks binnen op **poort 3500**, waar de Next-service
 luistert. Cloudflare regelt daarmee ook het certificaat.
 
 Gevolg: **`deploy/Caddyfile` is op dit moment niet in gebruik.** Caddy staat wel
-geïnstalleerd en luistert op 80 en 443, maar daar komt
-niemand — een certificaataanvraag mislukt dan ook (`journalctl -u caddy` toont
-522's). Wil je Caddy alsnog gebruiken, bijvoorbeeld voor nettere demo-URL's of
+geïnstalleerd en luistert op 80 en 443, maar daar komt niemand — een
+certificaataanvraag mislukt dan ook (`journalctl -u caddy` toont 522's). Wil je Caddy alsnog gebruiken, bijvoorbeeld voor nettere demo-URL's of
 extra headers, dan moet het inkomende verkeer bij Cloudflare naar **poort 80**
 wijzen in plaats van 3500. Anders kun je Caddy net zo goed uitzetten
 (`sudo systemctl disable --now caddy`).
