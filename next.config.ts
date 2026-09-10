@@ -7,8 +7,10 @@ const nextConfig: NextConfig = {
   // Alleen voor `next dev`: zonder dit weigert de dev-server /_next/static/*
   // aan elk ander origin dan localhost. Testen op je telefoon via het
   // LAN-adres levert dan een pagina zonder JavaScript op — de site rendert,
-  // maar niets hydrateert. Raakt de productiebuild niet.
-  allowedDevOrigins: ["<dev-host>"],
+  // maar niets hydrateert. Raakt de productiebuild niet. Uit het env, want een
+  // LAN-adres verschilt per netwerk en hoort niet in een publieke repo: zet
+  // DEV_ORIGIN in .env.local. Leeg is prima zolang je op localhost werkt.
+  allowedDevOrigins: process.env.DEV_ORIGIN ? [process.env.DEV_ORIGIN] : [],
   experimental: {
     // Een server action mag standaard 1 MB ontvangen; saveUpload() laat 3 MB
     // per bestand toe. De briefing stuurt er maximaal zes tegelijk, maar de

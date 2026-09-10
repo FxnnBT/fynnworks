@@ -70,9 +70,10 @@ code veranderen niets meer aan wat er op de site staat.
 
 ### Bestanden naar de Pi
 
-Niet via git — de repo is privé en GitHub accepteert sinds 2021 geen wachtwoord
-meer voor git-operaties, dus dat kost je een access token op de Pi. Kopieer
-direct over SSH:
+Niet via git: dat kost je een access token op de Pi, en je zou eerst moeten
+committen voordat je iets kunt uitproberen. Kopieer direct over SSH — zet
+`<pi-host>` in je `~/.ssh/config`, dan hoef je adres en gebruiker hieronder
+nergens in te typen:
 
 ```bash
 # op de Pi, eenmalig
@@ -111,8 +112,8 @@ sudo systemctl enable --now fynnworks
 curl -I localhost:3500/nl            # hoort 200 te geven
 ```
 
-`.env.example` staat niet in git (`.gitignore` negeert `.env*`), dus de inhoud
-van `/etc/fynnworks.env` staat hier:
+Dezelfde variabelen als `.env.example`, met echte waarden. De inhoud van
+`/etc/fynnworks.env`:
 
 ```
 SMTP_HOST=smtp.hostnet.nl
@@ -122,6 +123,9 @@ SMTP_PASS=<wachtwoord van de mailbox>
 CONTACT_TO=info@fynnworks.nl
 ADMIN_PASSWORD=<wachtwoord voor /admin>
 ```
+
+`DEV_ORIGIN` hoort daar niet in: die is alleen voor `next dev` op je eigen pc
+(zie `.env.example`).
 
 `mailout.hostnet.nl` werkt niet van buiten Hostnets netwerk — die timet out op
 25, 465 en 587. Gebruik `smtp.hostnet.nl`.
@@ -192,20 +196,20 @@ ben je ze kwijt; bewaar het origineel dus op je pc.
 `fynnworks.nl` is de canonical host. `www.fynnworks.nl`, `fynnworks.com` en
 `www.fynnworks.com` sturen permanent (301) door naar `fynnworks.nl`.
 
-DNS en en TLS lopen via Cloudflare, niet vanaf deze Pi. Het
-verkeer komt van Cloudflare rechtstreeks binnen op **poort 3500**, waar de
-Next-service luistert. Cloudflare regelt daarmee ook het certificaat.
+DNS en TLS lopen via Cloudflare, niet vanaf deze Pi. Het verkeer komt van
+Cloudflare rechtstreeks binnen op **poort 3500**, waar de Next-service
+luistert. Cloudflare regelt daarmee ook het certificaat.
 
-Gevolg: **`deploy/Caddyfile` is op dit moment niet in gebruik.** Caddy staat op
-18 augustus 2026 wel geïnstalleerd en luistert op 80 en 443, maar daar komt
+Gevolg: **`deploy/Caddyfile` is op dit moment niet in gebruik.** Caddy staat wel
+geïnstalleerd en luistert op 80 en 443, maar daar komt
 niemand — een certificaataanvraag mislukt dan ook (`journalctl -u caddy` toont
 522's). Wil je Caddy alsnog gebruiken, bijvoorbeeld voor nettere demo-URL's of
 extra headers, dan moet het inkomende verkeer bij Cloudflare naar **poort 80**
 wijzen in plaats van 3500. Anders kun je Caddy net zo goed uitzetten
 (`sudo systemctl disable --now caddy`).
 
-- **Vast IP** — heb je een wisselend IP van je verbinding, dan heb je dynamische DNS nodig,
-  anders is de site na een IP-wissel onbereikbaar.
+- **Vast IP** — heb je een wisselend IP van je verbinding, dan heb je
+  dynamische DNS nodig, anders is de site na een IP-wissel onbereikbaar.
 
 Wissel je van hoofddomein, pas dan `url` in `lib/site.ts` aan — daar komen de
 canonical-tags, `sitemap.xml` en `robots.txt` uit. Zet je Caddy ooit alsnog in

@@ -32,6 +32,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ...behalve het voorbeeld: dat staat vol placeholders en AANPASSEN.md verwijst
+# ernaar, dus wie de repo cloont moet het hebben.
+!.env.example
 
 # schrijfbare gegevens (projecten, reviews, uploads) - lokale tegenhanger van
 # /var/lib/fynnworks op de Pi
