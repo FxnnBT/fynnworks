@@ -146,13 +146,27 @@ Telefoon: {{phone}}
 
 ---
 
-## Artikel 9 — Meerwerk
+## Artikel 9 — Meerwerk en werkzaamheden na oplevering
 
 9.1 Werkzaamheden die buiten de in de Opdrachtbevestiging beschreven opdracht vallen, gelden als meerwerk.
 
 9.2 fynnworks voert meerwerk pas uit na schriftelijke of per e-mail gegeven akkoord van Opdrachtgever op een opgave van de verwachte kosten.
 
-9.3 Meerwerk wordt afgerekend tegen het uurtarief van € {{hourlyRate}} exclusief btw, tenzij een vaste prijs is afgesproken.
+9.3 Meerwerk wordt afgerekend tegen het uurtarief van € {{hourlyRate}} exclusief btw. Aan Consumenten wordt dit tarief in rekening gebracht inclusief btw: € {{hourlyRateInclVat}} per uur. Is voor het meerwerk een vaste prijs afgesproken, dan geldt die.
+
+**Werkzaamheden na oplevering**
+
+9.4 Nadat de website is geaccepteerd, live is gegaan en de factuur volledig is voldaan, is de opdracht afgerond. Vraagt Opdrachtgever daarna om verdere werkzaamheden — nieuwe functies, uitbreidingen, wijzigingen in tekst of ontwerp, koppelingen, updates, of herstel van problemen die zijn ontstaan door toedoen van Opdrachtgever of een derde — dan vallen die buiten de oorspronkelijke opdracht en gelden zij als een nieuwe opdracht.
+
+9.5 Op die werkzaamheden zijn deze voorwaarden van toepassing en geldt het uurtarief uit lid 9.3, tenzij partijen voor een omvangrijker vervolg opnieuw een Opdrachtbevestiging met een vaste prijs sluiten. Ook hier begint fynnworks pas na akkoord van Opdrachtgever op een opgave vooraf, zoals bedoeld in lid 9.2. Komt zo’n vervolgopdracht met een Consument op afstand tot stand, dan geldt daarvoor opnieuw artikel 18 (bedenktijd).
+
+9.6 De bestede tijd wordt bijgehouden en afgerond op kwartieren, met een minimum van 15 minuten per verzoek. Facturering vindt plaats per afgeronde opdracht of maandelijks achteraf, met dezelfde betaaltermijn als in artikel 8.
+
+9.7 Herstel van gebreken dat op grond van artikel 7.2 of op grond van de wet voor rekening van fynnworks komt, blijft kosteloos. Lid 9.4 heeft daar geen betrekking op.
+
+9.8 fynnworks is niet verplicht een verzoek om vervolgwerkzaamheden aan te nemen en is daarbij niet gebonden aan een reactie- of hersteltermijn, tenzij partijen daarover een afzonderlijke onderhoudsafspraak hebben gemaakt.
+
+9.9 fynnworks mag het uurtarief eenmaal per jaar per 1 januari aanpassen. Een gewijzigd tarief geldt niet voor werkzaamheden waarvoor Opdrachtgever al akkoord heeft gegeven. Wordt het tarief tegenover een Consument verhoogd binnen drie maanden na het sluiten van de betreffende overeenkomst, dan mag die Consument de overeenkomst ontbinden.
 
 ---
 

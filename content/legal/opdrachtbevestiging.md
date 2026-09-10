@@ -121,7 +121,9 @@ Opdrachtgever staat ervoor in dat hij het recht heeft om de aangeleverde materia
 
 **Wijze van betaling:** Opdrachtgever ontvangt een factuur per e-mail met een betaallink. fynnworks ontvangt of verwerkt zelf geen betaalgegevens.
 
-**Uurtarief voor meerwerk:** € [bedrag] excl. btw. Meerwerk wordt uitsluitend uitgevoerd na akkoord op een opgave vooraf.
+**Uurtarief voor meerwerk en werk na oplevering:** € 32,50 excl. btw (€ 39,33 incl. btw voor een particuliere opdrachtgever). Wordt uitsluitend uitgevoerd na akkoord op een opgave vooraf, afgerond op kwartieren met een minimum van 15 minuten per verzoek. Zie onderdeel 9 van de algemene voorwaarden.
+
+**Na oplevering.** Zodra de site live staat en de factuur is voldaan, is deze opdracht afgerond. Wil je daarna nieuwe functies, uitbreidingen of wijzigingen, dan is dat een nieuwe opdracht: tegen bovenstaand uurtarief, of tegen een nieuwe vaste prijs als het om meer werk gaat. Onderhoud is niet inbegrepen tenzij dat hierboven staat.
 
 > **Livegang en overdracht volgen op betaling.** De website blijft tot volledige betaling op de testomgeving van fynnworks staan. Pas daarna gaat de site live, worden inloggegevens en bestanden overgedragen en gaan de rechten uit onderdeel 8 over op Opdrachtgever.
 

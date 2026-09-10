@@ -9,6 +9,11 @@ export const SITE = {
   email: "info@fynnworks.nl",
 } as const
 
+/** In centen, want 32,50 x 1,21 gaat in floats mis en levert 39,32 op. */
+const HOURLY_RATE_CENTS = 3250
+const VAT_PERCENT = 21
+const eur = (cents: number) => (cents / 100).toFixed(2).replace(".", ",")
+
 /**
  * Wat je wettelijk moet tonen (art. 3:15d BW / Dienstenwet) plus de waarden die
  * de algemene voorwaarden invullen. Eén bron: content/legal/*.md vervangt de
@@ -32,8 +37,13 @@ export const BUSINESS = {
   /** Verhoog de versie zodra je de voorwaarden inhoudelijk wijzigt. */
   termsVersion: "1.0",
   termsDate: "TODO",
-  /** Artikel 9.3: uurtarief meerwerk, exclusief btw. */
-  hourlyRate: "TODO",
+  /** Artikel 9.3: uurtarief meerwerk en werk na oplevering, excl. btw. */
+  hourlyRate: eur(HOURLY_RATE_CENTS),
+  /** Hetzelfde tarief inclusief btw: dat is wat een Consument betaalt en wat
+   *  je hem volgens de wet moet tonen. Val je onder de KOR: VAT_PERCENT op 0. */
+  hourlyRateInclVat: eur(
+    Math.round((HOURLY_RATE_CENTS * (100 + VAT_PERCENT)) / 100),
+  ),
   /** Artikel 14.2: maximum aansprakelijkheid per gebeurtenis. */
   liabilityCap: "TODO",
   /** Datum waarop de privacyverklaring voor het laatst wijzigde. */

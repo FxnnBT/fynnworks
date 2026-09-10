@@ -1,3 +1,5 @@
+import { BUSINESS } from "@/lib/site"
+
 export const LANGS = ["nl", "en"] as const
 export type Lang = (typeof LANGS)[number]
 
@@ -163,6 +165,11 @@ const nl = {
         question: "Van wie is de site als we klaar zijn?",
         answer:
           "Van jou. Domein, code en beeldmateriaal zijn jouw eigendom. Je zit niet vast aan een abonnement en kunt er op elk moment mee naar iemand anders.",
+      },
+      {
+        question: "En als ik er later iets bij wil?",
+        answer:
+          `Kan altijd. Nieuwe functies, uitbreidingen of wijzigingen na oplevering reken ik per uur af: € ${BUSINESS.hourlyRate} excl. btw, € ${BUSINESS.hourlyRateInclVat} incl. btw voor particulieren. Je krijgt vooraf een inschatting en ik begin pas als je akkoord geeft. Wordt het een groter vervolg, dan maak ik er opnieuw een vaste prijs van.`,
       },
     ],
   },
@@ -375,6 +382,11 @@ const en: Dict = {
         question: "Who owns the site when we are done?",
         answer:
           "You do. Domain, code and imagery are yours. There is no subscription tying you in, and you can take all of it to someone else at any time.",
+      },
+      {
+        question: "What if I want to add something later?",
+        answer:
+          `Always possible. New features, extensions or changes after handover are billed by the hour: € ${BUSINESS.hourlyRate} excl. VAT, € ${BUSINESS.hourlyRateInclVat} incl. VAT for consumers. You get an estimate up front and I only start once you approve it. For a larger follow-up I quote a fixed price again.`,
       },
     ],
   },
