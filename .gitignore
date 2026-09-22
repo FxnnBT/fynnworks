@@ -49,3 +49,6 @@ next-env.d.ts
 
 # graphify kennisgraaf — lokaal gereedschap, hoort niet op de Pi
 /graphify-out/
+
+# brag-video-uitvoer — lokaal gereedschap, hoort niet in de repo of op de Pi
+/brag-output/
