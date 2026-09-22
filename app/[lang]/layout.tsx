@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google"
 import { notFound } from "next/navigation"
 import { LANGS, getDictionary, isLang } from "@/content/dictionaries"
+import { jsonLd } from "@/lib/jsonld"
 import { SITE } from "@/lib/site"
 import "../globals.css"
 
@@ -49,6 +50,14 @@ export async function generateMetadata({
       locale: lang === "nl" ? "nl_NL" : "en_US",
       type: "website",
     },
+    // De afbeelding zelf komt uit opengraph-image.tsx hiernaast; Next zet die
+    // onder zowel og:image als twitter:image. Dit zegt alleen nog hoe X hem
+    // moet tonen — zonder deze regel wordt het een klein vierkantje.
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+    },
   }
 }
 
@@ -75,23 +84,13 @@ export default async function LangLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col overflow-x-hidden">
-        {/* Vertelt Google dat "fynnworks" een organisatie is en niet een
-            typefout. Vaste waarden uit lib/site.ts, geen gebruikersinvoer. */}
+        {/* Vertelt Google en de AI-crawlers dat "fynnworks" een bedrijf is,
+            wat het aanbiedt en wat het kost. Opgebouwd in lib/jsonld.ts uit
+            lib/site.ts en de dictionary — vaste waarden, geen bezoekersinvoer,
+            dus veilig in een script-tag. */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name: SITE.name,
-              url: SITE.url,
-              email: SITE.email,
-              description: dict.meta.description,
-              areaServed: "NL",
-              knowsLanguage: ["nl", "en"],
-              serviceType: "Webdesign en webdevelopment",
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(dict, lang)) }}
         />
         {children}
       </body>

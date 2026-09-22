@@ -42,6 +42,9 @@ const nl = {
       {
         name: "Landingspagina",
         price: "vanaf €450",
+        /** Vanafprijs in euro, excl. btw, voor de Offer in de structured data.
+         *  null = "op aanvraag": dan staat er bewust geen prijs in het schema. */
+        minPrice: 450,
         description:
           "Eén pagina die één ding doet: bezoekers omzetten in aanvragen. Binnen twee weken live.",
         points: ["Ontwerp op maat", "Contactformulier", "Vindbaar in Google"],
@@ -49,6 +52,7 @@ const nl = {
       {
         name: "Multi-page site",
         price: "vanaf €1.200",
+        minPrice: 1200,
         description:
           "Meerdere pagina's, een duidelijk verhaal en een structuur waar je jaren mee vooruit kunt.",
         points: ["5–10 pagina's", "Teksten meedenken", "Zelf aanpasbaar"],
@@ -56,6 +60,7 @@ const nl = {
       {
         name: "Maatwerk",
         price: "op aanvraag",
+        minPrice: null,
         description:
           "Webshop, boekingssysteem, portaal met inlog. Alles wat verder gaat dan een brochure.",
         points: ["Koppelingen & API's", "Inlog en rollen", "Onderhoud & hosting"],
@@ -261,6 +266,7 @@ const en: Dict = {
       {
         name: "Landing page",
         price: "from €450",
+        minPrice: 450,
         description:
           "One page doing one job: turning visitors into enquiries. Live within two weeks.",
         points: ["Custom design", "Contact form", "Findable on Google"],
@@ -268,6 +274,7 @@ const en: Dict = {
       {
         name: "Multi-page site",
         price: "from €1,200",
+        minPrice: 1200,
         description:
           "Multiple pages, a clear story, and a structure that lasts you years.",
         points: ["5–10 pages", "Copy guidance", "Editable by you"],
@@ -275,6 +282,7 @@ const en: Dict = {
       {
         name: "Custom build",
         price: "on request",
+        minPrice: null,
         description:
           "Web shop, booking system, portal with logins. Anything beyond a brochure.",
         points: ["Integrations & APIs", "Auth and roles", "Hosting & upkeep"],
