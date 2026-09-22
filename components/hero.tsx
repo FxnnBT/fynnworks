@@ -43,7 +43,14 @@ export function Hero({ dict }: { dict: Dict }) {
           {dict.hero.title}
         </h1>
 
-        <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+        {/* Eigen regel tussen kop en lead: wit en groter dan de lead, zodat de
+            volgorde eyebrow -> kop -> reden -> uitleg in één blik te lezen is.
+            Zonder eigen plek verdwijnt deze zin in de alinea eronder. */}
+        <p className="mt-8 max-w-[26ch] text-xl leading-snug text-foreground sm:text-2xl">
+          {dict.hero.tagline}
+        </p>
+
+        <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
             {dict.hero.lead}
           </p>

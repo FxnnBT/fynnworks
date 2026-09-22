@@ -11,7 +11,7 @@ const nl = {
   meta: {
     title: "fynnworks — websites die werk opleveren",
     description:
-      "Ik ontwerp en bouw snelle, eigenzinnige websites voor ondernemers. Van landingspagina tot volledige bedrijfssite.",
+      "Websites voor ondernemers, gebouwd door een student. Scherpe prijzen, geen bureautarief — vanaf €450, en je praat met degene die het bouwt.",
   },
   nav: {
     label: "Hoofdnavigatie",
@@ -27,8 +27,13 @@ const nl = {
   hero: {
     eyebrow: "Webdesign & development",
     title: "Websites die\nwerk opleveren.",
+    /** De reden om voor mij te kiezen, als losse regel onder de kop. Kort
+     *  houden: hij staat op ooghoogte en moet in één blik te lezen zijn.
+     *  De tweede helft vangt op wat de eerste oproept: "student" verklaart de
+     *  prijs, maar roept twijfel op over de kwaliteit. Allebei in één zin. */
+    tagline: "Studentenprijzen, geen studentenwerk.",
     lead:
-      "Geen template die iedereen al heeft. Ik ontwerp en bouw websites die snel laden, goed vindbaar zijn, er uitzien alsof je er om geeft en werk opleveren.",
+      "Ik bouw websites naast mijn studie. Dat scheelt je het tarief van een bureau, niet de kwaliteit: ik ontwerp, bouw en lever zelf op, en je ziet het ontwerp voordat er één regel code staat.",
     primary: "Start een project",
     secondary: "Bekijk werk",
   },
@@ -211,7 +216,7 @@ const nl = {
     directLabel: "Liever direct mailen?",
   },
   footer: {
-    tagline: "Websites voor ondernemers. Gebouwd in Nederland.",
+    tagline: "Studentenprijzen, geen studentenwerk.",
     rights: "Alle rechten voorbehouden.",
     // Art. 3:15d BW en de Dienstenwet: KvK-nummer en btw-id moeten vindbaar
     // zijn op de site zelf, niet alleen op de factuur.
@@ -237,7 +242,7 @@ const en: Dict = {
   meta: {
     title: "fynnworks — websites that earn their keep",
     description:
-      "I design and build fast, opinionated websites for small businesses. From landing page to full company site.",
+      "Websites for small businesses, built by a student. Sharp pricing, no agency rate — from €450, and you talk to the person who builds it.",
   },
   nav: {
     label: "Main navigation",
@@ -253,8 +258,9 @@ const en: Dict = {
   hero: {
     eyebrow: "Web design & development",
     title: "Websites that\nearn their keep.",
+    tagline: "Student rates, not student work.",
     lead:
-      "Not the template everyone else already has. I design and build websites that load fast, rank well, look like you care and earn their keep.",
+      "I build websites alongside my studies. That saves you an agency's rate, not the quality: I design, build and ship it myself, and you see the design before a single line of code exists.",
     primary: "Start a project",
     secondary: "See the work",
   },
@@ -426,7 +432,7 @@ const en: Dict = {
     directLabel: "Rather email directly?",
   },
   footer: {
-    tagline: "Websites for small businesses. Built in the Netherlands.",
+    tagline: "Student rates, not student work.",
     rights: "All rights reserved.",
     kvk: "KvK",
     vat: "VAT",
