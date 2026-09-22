@@ -11,7 +11,10 @@ export const SITE = {
    *  Google-bedrijfsprofiel. Vult sameAs in de structured data, waarmee Google
    *  en LLM's de site aan die accounts koppelen. Leeg laten mag — een
    *  verkeerde URL is schadelijker dan geen. */
-  profiles: [] as readonly string[],
+  profiles: [
+    "https://www.linkedin.com/in/fynn-tervoort-7243a8386",
+    "https://github.com/FxnnBT",
+  ] as readonly string[],
 } as const
 
 /** In centen, want 32,50 x 1,21 gaat in floats mis en levert 39,32 op. */
