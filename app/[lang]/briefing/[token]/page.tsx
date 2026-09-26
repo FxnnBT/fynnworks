@@ -21,6 +21,9 @@ export const dynamic = "force-dynamic"
 export const metadata: Metadata = {
   title: "Briefing",
   robots: { index: false, follow: false },
+  // Klikt de klant hierna door naar de rest van de site, dan zou het adres
+  // mét token als verwijzer meegaan, en GoatCounter bewaart verwijzers.
+  referrer: "no-referrer",
 }
 
 export default async function BriefingPage({

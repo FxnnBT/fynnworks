@@ -16,9 +16,9 @@ fynnworks is verwerkingsverantwoordelijke voor de gegevens die via deze website 
 
 ## 1. Kort samengevat
 
-Deze site verzamelt zo min mogelijk. Er staat geen analytics op, geen trackingpixels, geen advertentienetwerken en geen social-media-embeds. Er wordt geen enkel profiel van je opgebouwd en er gaan geen gegevens naar derden voor marketingdoeleinden. Alleen wat je zelf in een formulier invult of meestuurt, verlaat je browser.
+Deze site verzamelt zo min mogelijk. Er zijn geen trackingpixels, geen advertentienetwerken en geen social-media-embeds. Wel houd ik bij hoeveel mensen de site bezoeken, met een teller op mijn eigen server die geen cookies gebruikt en geen IP-adressen opslaat (zie artikel 6). Er wordt geen enkel profiel van je opgebouwd en er gaan geen gegevens naar derden voor marketingdoeleinden.
 
-Om die reden zie je hier ook geen cookiebanner: er wordt geen cookie geplaatst waarvoor toestemming nodig is. Zie artikel 6.
+Om die reden zie je hier ook geen cookiebanner: er wordt geen cookie geplaatst waarvoor toestemming nodig is. Zie artikel 7.
 
 ---
 
@@ -82,7 +82,27 @@ E-mail loopt via een SMTP-provider. Die verwerkt de inhoud van het contactformul
 
 ---
 
-## 6. Cookies
+## 6. Bezoekersstatistieken
+
+**Waarom:** om te weten hoeveel mensen de site bezoeken, via welke site of zoekmachine ze binnenkomen en welke pagina's ze openen.
+
+**Hoe:** met GoatCounter, open-source software die op mijn eigen server draait. Er gaat niets naar een analyticsbedrijf of een andere derde partij.
+
+**Welke gegevens:** bij het openen van een pagina stuurt je browser het adres van die pagina, de site waar je vandaan kwam en je schermbreedte mee. De server ziet daarnaast, zoals bij elk verzoek, je IP-adres en je browsertype.
+
+**Wat er bewaard wordt:** alleen tellingen per pagina, per dag of per uur: hoeveel bezoekers, via welke verwijzende site, met welke browser en welk besturingssysteem, met welke schermbreedte en uit welk land. Het land leidt de server zelf af uit je IP-adres, zonder daarvoor een externe dienst te raadplegen. Die tellingen staan los van elkaar: te zien is hoeveel bezoekers Firefox gebruikten en hoeveel er uit Nederland kwamen, niet dat een bezoeker uit Nederland Firefox gebruikte.
+
+**IP-adres en browsertype:** worden niet opgeslagen. Om te voorkomen dat iemand die een pagina herlaadt twee keer telt, houdt de server de combinatie van IP-adres en browsertype maximaal acht uur in het werkgeheugen vast, gekoppeld aan een willekeurige code. Daarna is die combinatie weg.
+
+**Grondslag:** gerechtvaardigd belang (art. 6 lid 1 sub f AVG): weten of de site gevonden en gebruikt wordt, zonder je te volgen of een profiel op te bouwen.
+
+**Cookies:** geen. Er wordt niets in je browser opgeslagen. Wat de teller uit je browser leest, dient alleen om te meten hoe de site gebruikt wordt en heeft geen of geringe gevolgen voor je privacy. Daarvoor is geen toestemming nodig (artikel 11.7a lid 3 Telecommunicatiewet).
+
+**Hoe lang:** de tellingen zijn niet tot jou te herleiden. Ik bewaar ze zolang de site bestaat.
+
+---
+
+## 7. Cookies
 
 Er staat één cookie op deze site:
 
@@ -98,7 +118,7 @@ Er worden geen analytische, functionele of marketingcookies van derden geplaatst
 
 ---
 
-## 7. Doorgifte en ontvangers
+## 8. Doorgifte en ontvangers
 
 Gegevens worden niet verkocht, verhuurd of gedeeld voor commerciële doeleinden. Ze worden alleen gedeeld als het niet anders kan:
 
@@ -110,7 +130,7 @@ Er vindt geen doorgifte plaats naar landen buiten de Europese Economische Ruimte
 
 ---
 
-## 8. Je rechten
+## 9. Je rechten
 
 Je hebt het recht om je gegevens in te zien, te laten corrigeren, te laten verwijderen, de verwerking te laten beperken, bezwaar te maken tegen de verwerking, en je gegevens in een gangbaar bestandsformaat te ontvangen. Heb je toestemming gegeven, dan mag je die op elk moment intrekken; dat raakt de rechtmatigheid van wat daarvoor gebeurde niet.
 
@@ -120,12 +140,12 @@ Vind je dat ik je verzoek niet goed afhandel, dan kun je een klacht indienen bij
 
 ---
 
-## 9. Beveiliging
+## 10. Beveiliging
 
 Al het verkeer loopt over HTTPS. De beheerpagina is met een wachtwoord afgeschermd en staat op `noindex`. Het aantal inlogpogingen is begrensd. Gegevens staan op eigen hardware, niet bij een derde partij. Wat klanten in de briefing uploaden is alleen voor de ingelogde beheerder op te vragen.
 
 ---
 
-## 10. Wijzigingen
+## 11. Wijzigingen
 
 Deze verklaring kan wijzigen wanneer de site of de werkwijze verandert. De datum bovenaan geeft aan wanneer dat voor het laatst gebeurde.

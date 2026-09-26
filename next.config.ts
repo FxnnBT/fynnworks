@@ -22,6 +22,18 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [{ source: "/", destination: "/nl", permanent: false }]
   },
+  // GoatCounter draait op de Pi en is van buiten het thuisnetwerk niet te
+  // bereiken (zie deploy/goatcounter.service). Via fynnworks.nl zelf, zodat er
+  // geen subdomein, DNS-record of open poort bij hoeft en de browser met niemand
+  // anders praat.
+  // Next geeft CF-Connecting-IP door en GoatCounter leest die als eerste, dus
+  // land en bezoekersaantal kloppen ondanks de proxy.
+  async rewrites() {
+    return [
+      { source: "/count", destination: "http://127.0.0.1:8081/count" },
+      { source: "/count.js", destination: "http://127.0.0.1:8081/count.js" },
+    ]
+  },
   // Demo's in public/demo/ zijn klantwerk en placeholders: wel te bezoeken met
   // de link, niet in Google. robots.txt vraagt het beleefd, deze header maakt
   // het hard — ook voor bots die al een directe link hebben.

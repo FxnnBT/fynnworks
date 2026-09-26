@@ -5,6 +5,7 @@ import Link from "next/link"
 import { marked } from "marked"
 import { ArrowLeft } from "lucide-react"
 import { LANGS, type Lang, getDictionary, isLang } from "@/content/dictionaries"
+import { GoatCounter } from "@/components/goatcounter"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { LEGAL, type LegalKey, legalKeyBySlug } from "@/lib/legal"
@@ -123,6 +124,7 @@ export default async function LegalPage({
         </div>
       </main>
       <SiteFooter dict={dict} lang={lang} />
+      <GoatCounter />
     </>
   )
 }

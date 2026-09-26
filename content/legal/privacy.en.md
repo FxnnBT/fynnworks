@@ -16,9 +16,9 @@ fynnworks is the data controller for the personal data processed through this we
 
 ## 1. The short version
 
-This site collects as little as possible. There is no analytics, no tracking pixels, no ad networks and no social media embeds. No profile of you is built and no data goes to third parties for marketing. Only what you enter or attach in a form ever leaves your browser.
+This site collects as little as possible. There are no tracking pixels, no ad networks and no social media embeds. I do keep track of how many people visit, with a counter on my own server that uses no cookies and stores no IP addresses (see section 6). No profile of you is built and no data goes to third parties for marketing.
 
-That is also why you see no cookie banner: no cookie requiring consent is placed. See section 6.
+That is also why you see no cookie banner: no cookie requiring consent is placed. See section 7.
 
 ---
 
@@ -82,7 +82,27 @@ Email is delivered through an SMTP provider. That provider processes the content
 
 ---
 
-## 6. Cookies
+## 6. Visitor statistics
+
+**Why:** to know how many people visit the site, which site or search engine they come from, and which pages they open.
+
+**How:** with GoatCounter, open-source software running on my own server. Nothing goes to an analytics company or any other third party.
+
+**What data:** when you open a page, your browser sends the address of that page, the site you came from and your screen width. Like with any request, the server also sees your IP address and browser type.
+
+**What is stored:** only counts per page, per day or per hour: how many visitors, from which referring site, with which browser and operating system, which screen width and from which country. The server derives the country from your IP address itself, without consulting an external service. These counts are kept separately: it shows how many visitors used Firefox and how many came from the Netherlands, not that a visitor from the Netherlands used Firefox.
+
+**IP address and browser type:** are not stored. To avoid counting someone who reloads a page twice, the server keeps the combination of IP address and browser type in memory for up to eight hours, linked to a random code. After that the combination is gone.
+
+**Legal basis:** legitimate interest (Art. 6(1)(f) GDPR): knowing whether the site is found and used, without following you or building a profile.
+
+**Cookies:** none. Nothing is stored in your browser. What the counter reads from your browser serves only to measure how the site is used and has little or no impact on your privacy. No consent is required for that (Article 11.7a(3) of the Dutch Telecommunications Act).
+
+**Retention:** the counts cannot be traced back to you. I keep them for as long as the site exists.
+
+---
+
+## 7. Cookies
 
 There is exactly one cookie on this site:
 
@@ -98,7 +118,7 @@ No analytics, functional or third-party marketing cookies are placed, and nothin
 
 ---
 
-## 7. Recipients and transfers
+## 8. Recipients and transfers
 
 Data is never sold, rented or shared for commercial purposes. It is shared only where unavoidable:
 
@@ -110,7 +130,7 @@ No data is transferred outside the European Economic Area, and there is no autom
 
 ---
 
-## 8. Your rights
+## 9. Your rights
 
 You have the right to access your data, to have it corrected or erased, to restrict processing, to object to processing, and to receive your data in a commonly used format. Where you have given consent, you may withdraw it at any time; that does not affect the lawfulness of processing before withdrawal.
 
@@ -120,12 +140,12 @@ If you believe I am not handling your request properly, you can lodge a complain
 
 ---
 
-## 9. Security
+## 10. Security
 
 All traffic runs over HTTPS. The admin page is password-protected and set to `noindex`. Login attempts are rate-limited. Data sits on my own hardware, not with a third party. Anything clients upload in the briefing is retrievable only by the signed-in administrator.
 
 ---
 
-## 10. Changes
+## 11. Changes
 
 This statement may change when the site or the way I work changes. The date at the top shows when that last happened.

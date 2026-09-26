@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { getDictionary, isLang } from "@/content/dictionaries"
 import { Contact } from "@/components/contact"
 import { Faq } from "@/components/faq"
+import { GoatCounter } from "@/components/goatcounter"
 import { Hero } from "@/components/hero"
 import { Process } from "@/components/process"
 import { Reviews } from "@/components/reviews"
@@ -47,6 +48,7 @@ export default async function HomePage({
         <Contact dict={dict} lang={lang} />
       </main>
       <SiteFooter dict={dict} lang={lang} />
+      <GoatCounter />
     </>
   )
 }

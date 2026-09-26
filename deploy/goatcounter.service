@@ -1,0 +1,29 @@
+[Unit]
+Description=GoatCounter, bezoekersstatistieken voor fynnworks
+After=network.target
+
+[Service]
+Type=simple
+User=goatcounter
+Group=goatcounter
+# De site zet /count en /count.js door naar 127.0.0.1:8081 (zie rewrites in
+# next.config.ts), dus bezoekers praten met fynnworks.nl en nooit rechtstreeks
+# met GoatCounter. Luistert op alle IPv4-adressen, zodat het dashboard thuis
+# op http://<pi-lan-ip>:8081 te openen is.
+ExecStart=/usr/local/bin/goatcounter serve -listen 0.0.0.0:8081 -db sqlite+/var/lib/goatcounter/db.sqlite3 -automigrate
+# "Alleen thuis" hangt zo niet af van de router: ook als poort 8081 ooit wordt
+# doorgestuurd, laat de kernel alleen localhost en private adressen toe. Het
+# geldt in beide richtingen, dus GoatCounter kan ook niet naar buiten bellen.
+IPAddressDeny=any
+IPAddressAllow=localhost 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+StateDirectory=goatcounter
+StateDirectoryMode=0750
+
+[Install]
+WantedBy=multi-user.target

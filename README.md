@@ -191,6 +191,43 @@ kent, dus je demo's gaan nooit mee — ze blijven wel staan op de Pi, want die
 `tar -x` overschrijft alleen en verwijdert niets. Zet je de Pi opnieuw op, dan
 ben je ze kwijt; bewaar het origineel dus op je pc.
 
+## Bezoekersstatistieken
+
+[GoatCounter](https://www.goatcounter.com) draait als eigen service op de Pi
+(`deploy/goatcounter.service`), met SQLite in `/var/lib/goatcounter`, op poort
+8081. Bezoekers bereiken hem via `fynnworks.nl/count` en `/count.js`, die
+`next.config.ts` doorzet naar `127.0.0.1:8081`. Er is dus geen subdomein,
+DNS-record of doorgestuurde poort. Het script staat in
+`components/goatcounter.tsx`, alleen op de homepage en de juridische pagina's
+(niet op `/briefing/<token>`). Wat er wel en niet wordt bewaard staat in
+artikel 6 van de privacyverklaring.
+
+Het dashboard staat thuis op `http://<pi-lan-ip>:8081`. Van buiten kan dat
+niet, ook niet als iemand poort 8081 op de router doorstuurt:
+`IPAddressAllow` in de unit laat alleen localhost en private adressen toe.
+Onderweg kan het wel via een tunnel, daarna op `http://localhost:8081`:
+
+```bash
+ssh -N -L 8081:127.0.0.1:8081 <gebruiker>@<pi-host>
+```
+
+Eenmalig opgezet met:
+
+```bash
+# op de Pi; binary van github.com/arp242/goatcounter/releases (linux-arm64)
+sudo install -m 755 goatcounter /usr/local/bin/goatcounter
+sudo useradd --system --no-create-home --shell /usr/sbin/nologin goatcounter
+sudo install -d -o goatcounter -g goatcounter -m 750 /var/lib/goatcounter
+cd /tmp && sudo -u goatcounter goatcounter db create site -createdb \
+  -db sqlite+/var/lib/goatcounter/db.sqlite3 -vhost fynnworks.nl -user.email <mail>
+sudo cp deploy/goatcounter.service /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now goatcounter
+```
+
+Je eigen bezoeken tellen niet meer mee nadat je één keer
+`https://fynnworks.nl/nl#toggle-goatcounter` hebt geopend. Dat zet een vlag in
+de localStorage van die browser.
+
 ## Domeinen
 
 `fynnworks.nl` is de canonical host. `www.fynnworks.nl`, `fynnworks.com` en
