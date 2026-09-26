@@ -43,7 +43,7 @@ export const BUSINESS = {
   phone: "TODO",
   email: SITE.email,
   /** Verhoog de versie zodra je de voorwaarden inhoudelijk wijzigt. */
-  termsVersion: "1.0",
+  termsVersion: "1.1",
   termsDate: "TODO",
   /** Artikel 9.3: uurtarief meerwerk en werk na oplevering, excl. btw. */
   hourlyRate: eur(HOURLY_RATE_CENTS),
