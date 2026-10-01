@@ -11,9 +11,8 @@ Datum: [datum]
 
 **Opdrachtnemer**
 fynnworks
-[Volledige naam], handelend onder de naam fynnworks
-[Straat en huisnummer], [postcode] [plaats]
-KvK: [nummer] — Btw-id: [nummer]
+Torenlaan 5, 1402 AT Bussum
+KvK: 42179737 — Btw-id: [nummer]
 [e-mailadres] — [telefoonnummer]
 
 **Opdrachtgever**

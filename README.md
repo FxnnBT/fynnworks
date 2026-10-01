@@ -228,6 +228,25 @@ Je eigen bezoeken tellen niet meer mee nadat je één keer
 `https://fynnworks.nl/nl#toggle-goatcounter` hebt geopend. Dat zet een vlag in
 de localStorage van die browser.
 
+### Melding bij een bezoek
+
+`deploy/visit-notify.sh` kijkt elke minuut of de totalen per pagina in
+GoatCounter zijn gestegen en post dan iets als `2× /nl` in een Discord-kanaal.
+Het draait als goatcounter (alleen-lezen op de database), maar in een eigen
+service, zodat GoatCounter zelf nog steeds niet naar buiten kan. Het
+webhook-adres staat alleen op de Pi. De eerste melding bevat alle bezoeken tot
+dan toe.
+
+```bash
+# Discord: kanaal → Instellingen → Integraties → Webhooks → URL kopiëren
+# op de Pi, na de overdracht
+sudo install -m 755 /srv/fynnworks/deploy/visit-notify.sh /usr/local/bin/visit-notify
+sudo install -m 600 /dev/null /etc/visit-notify.env
+sudoedit /etc/visit-notify.env   # één regel: DISCORD_WEBHOOK=<webhook-url>
+sudo cp /srv/fynnworks/deploy/visit-notify.service /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now visit-notify
+```
+
 ## Domeinen
 
 `fynnworks.nl` is de canonical host. `www.fynnworks.nl`, `fynnworks.com` en

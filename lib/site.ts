@@ -31,13 +31,13 @@ const eur = (cents: number) => (cents / 100).toFixed(2).replace(".", ",")
  * compliant — dat is bewust zichtbaar in plaats van stilletjes leeg.
  */
 export const BUSINESS = {
-  /** Je eigen naam; fynnworks is de handelsnaam. */
-  legalName: "TODO",
+  /** Naam waaronder je in het Handelsregister staat. */
+  legalName: "fynnworks",
   /** Vestigingsadres, geen postbus — dat eist de Dienstenwet. */
-  street: "TODO",
-  postcode: "TODO",
-  city: "TODO",
-  kvk: "TODO",
+  street: "Torenlaan 5",
+  postcode: "1402 AT",
+  city: "Bussum",
+  kvk: "42179737",
   /** Btw-identificatienummer (NL…B01), niet je omzetbelastingnummer. */
   vat: "TODO",
   phone: "TODO",

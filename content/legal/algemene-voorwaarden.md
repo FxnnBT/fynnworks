@@ -2,8 +2,7 @@
 
 **Versie {{termsVersion}} — {{termsDate}}**
 
-fynnworks
-{{legalName}}, handelend onder de naam fynnworks
+{{legalName}}
 {{street}}, {{postcode}} {{city}}
 KvK-nummer: {{kvk}}
 Btw-identificatienummer: {{vat}}

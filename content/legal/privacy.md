@@ -2,8 +2,7 @@
 
 **Laatst bijgewerkt: {{privacyDate}}**
 
-fynnworks
-{{legalName}}, handelend onder de naam fynnworks
+{{legalName}}
 {{street}}, {{postcode}} {{city}}
 KvK-nummer: {{kvk}}
 Btw-identificatienummer: {{vat}}
@@ -86,7 +85,7 @@ E-mail loopt via een SMTP-provider. Die verwerkt de inhoud van het contactformul
 
 **Waarom:** om te weten hoeveel mensen de site bezoeken, via welke site of zoekmachine ze binnenkomen en welke pagina's ze openen.
 
-**Hoe:** met GoatCounter, open-source software die op mijn eigen server draait. Er gaat niets naar een analyticsbedrijf of een andere derde partij.
+**Hoe:** met GoatCounter, open-source software die op mijn eigen server draait. Er gaat niets naar een analyticsbedrijf. Wel stuurt mijn server mij via Discord een melding als er een bezoeker bij komt. Daarin staat alleen welke pagina en hoeveel nieuwe bezoekers, niets over wie je bent of waar je vandaan komt.
 
 **Welke gegevens:** bij het openen van een pagina stuurt je browser het adres van die pagina, de site waar je vandaan kwam en je schermbreedte mee. De server ziet daarnaast, zoals bij elk verzoek, je IP-adres en je browsertype.
 

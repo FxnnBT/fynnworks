@@ -322,11 +322,26 @@ export function ShaderBackground({ className }: { className?: string }) {
     const pendingRelease = pendingContextReleases.get(canvas)
     if (pendingRelease !== undefined) window.clearTimeout(pendingRelease)
     pendingContextReleases.delete(canvas)
-    const gl = canvas.getContext("webgl", { antialias: false })
+    // Tekent de browser op de CPU (SwiftShader, llvmpipe), dan legt deze shader
+    // de hele pagina plat: Lighthouse zonder GPU mat 41 s blocking time en
+    // PageSpeed Insights gaf "pagina reageert niet meer". Dat is een verwacht
+    // pad, geen fout, dus ook geen console.error (die telt Lighthouse mee).
+    // failIfMajorPerformanceCaveat vangt alleen een terugval na een GPU op de
+    // blocklist; een geforceerde SwiftShader (headless) krijgt gewoon een
+    // context, vandaar ook de check op de rendernaam.
+    const gl = canvas.getContext("webgl", {
+      antialias: false,
+      failIfMajorPerformanceCaveat: true,
+    })
     // Bij elk faalpad hieronder blijft het canvas doorzichtig en zie je de
     // statische achtergrond eronder (zie hero.tsx) in plaats van een leeg vlak.
-    if (!gl) {
-      console.error("[ShaderBackground] geen WebGL-context")
+    if (!gl) return
+    const debugInfo = gl.getExtension("WEBGL_debug_renderer_info")
+    const renderer = debugInfo
+      ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL))
+      : ""
+    if (/swiftshader|llvmpipe|software/i.test(renderer)) {
+      gl.getExtension("WEBGL_lose_context")?.loseContext()
       return
     }
 

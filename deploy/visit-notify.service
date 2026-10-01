@@ -1,0 +1,25 @@
+[Unit]
+Description=Meldt nieuwe bezoekers van fynnworks in Discord
+After=goatcounter.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Alleen goatcounter mag in /var/lib/goatcounter; het script opent die
+# database alleen-lezen. Het draait los van goatcounter.service, zodat
+# GoatCounter zelf nog steeds niet naar buiten kan bellen.
+User=goatcounter
+Group=goatcounter
+# DISCORD_WEBHOOK=https://discord.com/api/webhooks/... — chmod 600, eigenaar root.
+EnvironmentFile=/etc/visit-notify.env
+ExecStart=/usr/local/bin/visit-notify
+Restart=always
+RestartSec=60
+StateDirectory=visit-notify
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

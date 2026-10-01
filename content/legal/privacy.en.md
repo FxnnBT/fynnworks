@@ -2,8 +2,7 @@
 
 **Last updated: {{privacyDate}}**
 
-fynnworks
-{{legalName}}, trading as fynnworks
+{{legalName}}
 {{street}}, {{postcode}} {{city}}
 Dutch Chamber of Commerce (KvK) number: {{kvk}}
 VAT identification number: {{vat}}
@@ -86,7 +85,7 @@ Email is delivered through an SMTP provider. That provider processes the content
 
 **Why:** to know how many people visit the site, which site or search engine they come from, and which pages they open.
 
-**How:** with GoatCounter, open-source software running on my own server. Nothing goes to an analytics company or any other third party.
+**How:** with GoatCounter, open-source software running on my own server. Nothing goes to an analytics company. My server does send me a Discord notification when a new visitor arrives. It says only which page and how many new visitors, nothing about who you are or where you came from.
 
 **What data:** when you open a page, your browser sends the address of that page, the site you came from and your screen width. Like with any request, the server also sees your IP address and browser type.
 
