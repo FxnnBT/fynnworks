@@ -40,7 +40,7 @@ export const BUSINESS = {
   city: "Bussum",
   kvk: "42179737",
   /** Btw-identificatienummer (NL…B01), niet je omzetbelastingnummer. */
-  vat: "TODO",
+  vat: "NL005556819B59",
   phone: "TODO",
   email: SITE.email,
   /** Verhoog de versie zodra je de voorwaarden inhoudelijk wijzigt. */
