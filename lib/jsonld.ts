@@ -92,7 +92,6 @@ export function jsonLd(dict: Dict, lang: Lang) {
         description: dict.meta.description,
         url: `${SITE.url}/${lang}`,
         email: SITE.email,
-        telephone: real(BUSINESS.phone),
         vatID: real(BUSINESS.vat),
         identifier: kvkIdentifier(),
         address: postalAddress(),

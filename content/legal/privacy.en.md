@@ -7,7 +7,6 @@
 Dutch Chamber of Commerce (KvK) number: {{kvk}}
 VAT identification number: {{vat}}
 Email: {{email}}
-Phone: {{phone}}
 
 fynnworks is the data controller for the personal data processed through this website.
 

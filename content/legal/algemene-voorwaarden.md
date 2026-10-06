@@ -7,7 +7,6 @@
 KvK-nummer: {{kvk}}
 Btw-identificatienummer: {{vat}}
 E-mail: {{email}}
-Telefoon: {{phone}}
 
 ---
 

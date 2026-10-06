@@ -13,7 +13,7 @@ Datum: [datum]
 fynnworks
 Torenlaan 5, 1402 AT Bussum
 KvK: 42179737 — Btw-id: NL005556819B59
-[e-mailadres] — [telefoonnummer]
+info@fynnworks.nl
 
 **Opdrachtgever**
 Naam: ...........................................................
