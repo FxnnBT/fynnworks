@@ -17,8 +17,9 @@ export const SITE = {
   ] as readonly string[],
 } as const
 
-/** In centen, want 32,50 x 1,21 gaat in floats mis en levert 39,32 op. */
-const HOURLY_RATE_CENTS = 3250
+/** In centen, want btw-rekenen in floats gaat mis (32,50 x 1,21 gaf 39,32).
+ *  Het tarief incl. btw is het ronde getal; excl. wordt daaruit afgeleid. */
+const HOURLY_RATE_INCL_VAT_CENTS = 4000
 const VAT_PERCENT = 21
 const eur = (cents: number) => (cents / 100).toFixed(2).replace(".", ",")
 
@@ -43,24 +44,17 @@ export const BUSINESS = {
   phone: "TODO",
   email: SITE.email,
   /** Verhoog de versie zodra je de voorwaarden inhoudelijk wijzigt. */
-  termsVersion: "1.1",
+  termsVersion: "1.2",
   termsDate: "TODO",
   /** Artikel 9.3: uurtarief meerwerk en werk na oplevering, excl. btw. */
-  hourlyRate: eur(HOURLY_RATE_CENTS),
+  hourlyRate: eur(
+    Math.round((HOURLY_RATE_INCL_VAT_CENTS * 100) / (100 + VAT_PERCENT)),
+  ),
   /** Hetzelfde tarief inclusief btw: dat is wat een Consument betaalt en wat
    *  je hem volgens de wet moet tonen. Val je onder de KOR: VAT_PERCENT op 0. */
-  hourlyRateInclVat: eur(
-    Math.round((HOURLY_RATE_CENTS * (100 + VAT_PERCENT)) / 100),
-  ),
+  hourlyRateInclVat: eur(HOURLY_RATE_INCL_VAT_CENTS),
   /** Artikel 14.2: maximum aansprakelijkheid per gebeurtenis. */
   liabilityCap: "TODO",
   /** Datum waarop de privacyverklaring voor het laatst wijzigde. */
   privacyDate: "TODO",
 } as const
-
-/**
- * Bij een prijs moet staan of er btw bij komt. Zakelijk mag exclusief, aan
- * consumenten moet je inclusief tonen — vandaar de zin in dict.services.vatNote.
- * TODO: bevestigen. Val je onder de KOR, zet dit dan op "geen btw".
- */
-export const VAT_SUFFIX = "excl. btw"

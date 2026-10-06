@@ -31,8 +31,8 @@ function kvkIdentifier() {
   return { "@type": "PropertyValue", name: "KvK", value }
 }
 
-/** Prijzen volgen VAT_SUFFIX in lib/site.ts: nu exclusief btw. Val je onder de
- *  KOR of ga je inclusief tonen, pas dan ook valueAddedTaxIncluded aan. */
+/** Prijzen volgen dict.services.vatSuffix: nu inclusief btw. Ga je exclusief
+ *  tonen of val je onder de KOR, pas dan ook valueAddedTaxIncluded aan. */
 function offerCatalog(dict: Dict) {
   return {
     "@type": "OfferCatalog",
@@ -53,7 +53,7 @@ function offerCatalog(dict: Dict) {
               "@type": "PriceSpecification",
               priceCurrency: "EUR",
               minPrice: item.minPrice,
-              valueAddedTaxIncluded: false,
+              valueAddedTaxIncluded: true,
             },
     })),
   }

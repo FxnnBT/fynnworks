@@ -91,7 +91,7 @@ Daaronder `services.items` — een lijst van drie. Per dienst:
 | Veld | Wat het is |
 |---|---|
 | `name` | Naam van de dienst |
-| `price` | De gele prijs eronder, bv. `"vanaf €450"` |
+| `price` | De gele prijs eronder, bv. `"vanaf €550"` |
 | `description` | De alinea in het midden |
 | `points` | Het lijstje met vinkjes rechts |
 

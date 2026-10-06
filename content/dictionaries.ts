@@ -11,7 +11,7 @@ const nl = {
   meta: {
     title: "fynnworks — websites die werk opleveren",
     description:
-      "Websites voor ondernemers, gebouwd door een student. Scherpe prijzen, geen bureautarief — vanaf €450, en je praat met degene die het bouwt.",
+      "Websites voor ondernemers, gebouwd door een student. Scherpe prijzen, geen bureautarief — vanaf €550, en je praat met degene die het bouwt.",
   },
   nav: {
     label: "Hoofdnavigatie",
@@ -41,23 +41,25 @@ const nl = {
     eyebrow: "Diensten",
     title: "Wat ik voor je bouw",
     // Verplicht bij een prijsvermelding: consumenten moeten weten wat ze
-    // uiteindelijk betalen. Het achtervoegsel zelf staat in lib/site.ts.
-    vatNote: "Richtprijzen, exclusief btw. Consumenten betalen inclusief btw.",
+    // uiteindelijk betalen. vatSuffix staat achter elk echt bedrag.
+    // Val je onder de KOR, maak er dan "geen btw" van.
+    vatNote: "Richtprijzen, inclusief btw.",
+    vatSuffix: "incl. btw",
     items: [
       {
         name: "Landingspagina",
-        price: "vanaf €450",
-        /** Vanafprijs in euro, excl. btw, voor de Offer in de structured data.
+        price: "vanaf €550",
+        /** Vanafprijs in euro, incl. btw, voor de Offer in de structured data.
          *  null = "op aanvraag": dan staat er bewust geen prijs in het schema. */
-        minPrice: 450,
+        minPrice: 550,
         description:
           "Eén pagina die één ding doet: bezoekers omzetten in aanvragen. Binnen twee weken live.",
         points: ["Ontwerp op maat", "Contactformulier", "Vindbaar in Google"],
       },
       {
         name: "Multi-page site",
-        price: "vanaf €1.200",
-        minPrice: 1200,
+        price: "vanaf €1.450",
+        minPrice: 1450,
         description:
           "Meerdere pagina's, een duidelijk verhaal en een structuur waar je jaren mee vooruit kunt.",
         points: ["5–10 pagina's", "Teksten meedenken", "Zelf aanpasbaar"],
@@ -179,7 +181,7 @@ const nl = {
       {
         question: "En als ik er later iets bij wil?",
         answer:
-          `Kan altijd. Nieuwe functies, uitbreidingen of wijzigingen na oplevering reken ik per uur af: € ${BUSINESS.hourlyRate} excl. btw, € ${BUSINESS.hourlyRateInclVat} incl. btw voor particulieren. Je krijgt vooraf een inschatting en ik begin pas als je akkoord geeft. Wordt het een groter vervolg, dan maak ik er opnieuw een vaste prijs van.`,
+          `Kan altijd. Nieuwe functies, uitbreidingen of wijzigingen na oplevering reken ik per uur af: € ${BUSINESS.hourlyRateInclVat} incl. btw, voor zakelijke klanten € ${BUSINESS.hourlyRate} excl. btw. Je krijgt vooraf een inschatting en ik begin pas als je akkoord geeft. Wordt het een groter vervolg, dan maak ik er opnieuw een vaste prijs van.`,
       },
     ],
   },
@@ -242,7 +244,7 @@ const en: Dict = {
   meta: {
     title: "fynnworks — websites that earn their keep",
     description:
-      "Websites for small businesses, built by a student. Sharp pricing, no agency rate — from €450, and you talk to the person who builds it.",
+      "Websites for small businesses, built by a student. Sharp pricing, no agency rate — from €550, and you talk to the person who builds it.",
   },
   nav: {
     label: "Main navigation",
@@ -267,20 +269,21 @@ const en: Dict = {
   services: {
     eyebrow: "Services",
     title: "What I build for you",
-    vatNote: "Indicative prices, excluding VAT. Consumers pay VAT-inclusive prices.",
+    vatNote: "Indicative prices, including VAT.",
+    vatSuffix: "incl. VAT",
     items: [
       {
         name: "Landing page",
-        price: "from €450",
-        minPrice: 450,
+        price: "from €550",
+        minPrice: 550,
         description:
           "One page doing one job: turning visitors into enquiries. Live within two weeks.",
         points: ["Custom design", "Contact form", "Findable on Google"],
       },
       {
         name: "Multi-page site",
-        price: "from €1,200",
-        minPrice: 1200,
+        price: "from €1,450",
+        minPrice: 1450,
         description:
           "Multiple pages, a clear story, and a structure that lasts you years.",
         points: ["5–10 pages", "Copy guidance", "Editable by you"],
@@ -400,7 +403,7 @@ const en: Dict = {
       {
         question: "What if I want to add something later?",
         answer:
-          `Always possible. New features, extensions or changes after handover are billed by the hour: € ${BUSINESS.hourlyRate} excl. VAT, € ${BUSINESS.hourlyRateInclVat} incl. VAT for consumers. You get an estimate up front and I only start once you approve it. For a larger follow-up I quote a fixed price again.`,
+          `Always possible. New features, extensions or changes after handover are billed by the hour: € ${BUSINESS.hourlyRateInclVat} incl. VAT, or € ${BUSINESS.hourlyRate} excl. VAT for businesses. You get an estimate up front and I only start once you approve it. For a larger follow-up I quote a fixed price again.`,
       },
     ],
   },
