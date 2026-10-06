@@ -44,7 +44,7 @@ export const BUSINESS = {
   email: SITE.email,
   /** Verhoog de versie zodra je de voorwaarden inhoudelijk wijzigt. */
   termsVersion: "1.2",
-  termsDate: "TODO",
+  termsDate: "6 oktober 2026",
   /** Artikel 9.3: uurtarief meerwerk en werk na oplevering, excl. btw. */
   hourlyRate: eur(
     Math.round((HOURLY_RATE_INCL_VAT_CENTS * 100) / (100 + VAT_PERCENT)),
@@ -53,7 +53,7 @@ export const BUSINESS = {
    *  je hem volgens de wet moet tonen. Val je onder de KOR: VAT_PERCENT op 0. */
   hourlyRateInclVat: eur(HOURLY_RATE_INCL_VAT_CENTS),
   /** Artikel 14.2: maximum aansprakelijkheid per gebeurtenis. */
-  liabilityCap: "TODO",
+  liabilityCap: "5.000",
   /** Datum waarop de privacyverklaring voor het laatst wijzigde. */
   privacyDate: "TODO",
 } as const
