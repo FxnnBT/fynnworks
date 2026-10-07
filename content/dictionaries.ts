@@ -1,3 +1,5 @@
+import { pageCopy } from "@/content/pages"
+import type { PageKey } from "@/lib/pages"
 import { BUSINESS } from "@/lib/site"
 
 export const LANGS = ["nl", "en"] as const
@@ -9,23 +11,26 @@ export function isLang(value: string): value is Lang {
 
 const nl = {
   meta: {
-    title: "fynnworks — websites die werk opleveren",
+    // Wat Google als blauwe kop en grijze tekst toont. De zoekterm voorop,
+    // de prijs erin: dat is waar iemand die "website laten maken" zoekt op
+    // klikt. Description rond de 150 tekens, daarna knipt Google af.
+    title: "Website laten maken vanaf €550 — fynnworks | ZZP & MKB",
     description:
-      "Websites voor ondernemers, gebouwd door een student. Scherpe prijzen, geen bureautarief — vanaf €550, en je praat met degene die het bouwt.",
+      "Website laten maken voor ZZP of MKB? fynnworks bouwt landingspagina's, bedrijfssites en webshops vanaf €550, binnen 2 weken live. Geen bureautarief: je praat direct met de bouwer.",
   },
   nav: {
     label: "Hoofdnavigatie",
     menu: "Menu",
     skip: "Naar inhoud",
     work: "Werk",
-    services: "Diensten",
+    pricing: "Prijzen",
     process: "Werkwijze",
     faq: "Vragen",
     contact: "Contact",
     cta: "Start een project",
   },
   hero: {
-    eyebrow: "Webdesign & development",
+    eyebrow: "Website laten maken voor ZZP & MKB",
     title: "Websites die\nwerk opleveren.",
     /** De reden om voor mij te kiezen, als losse regel onder de kop. Kort
      *  houden: hij staat op ooghoogte en moet in één blik te lezen zijn.
@@ -52,6 +57,8 @@ const nl = {
         /** Vanafprijs in euro, incl. btw, voor de Offer in de structured data.
          *  null = "op aanvraag": dan staat er bewust geen prijs in het schema. */
         minPrice: 550,
+        /** De eigen pagina van deze dienst, zie lib/pages.ts. */
+        page: "landing" as PageKey,
         description:
           "Eén pagina die één ding doet: bezoekers omzetten in aanvragen. Binnen twee weken live.",
         points: ["Ontwerp op maat", "Contactformulier", "Vindbaar in Google"],
@@ -60,6 +67,7 @@ const nl = {
         name: "Multi-page site",
         price: "vanaf €1.450",
         minPrice: 1450,
+        page: "business" as PageKey,
         description:
           "Meerdere pagina's, een duidelijk verhaal en een structuur waar je jaren mee vooruit kunt.",
         points: ["5–10 pagina's", "Teksten meedenken", "Zelf aanpasbaar"],
@@ -68,6 +76,7 @@ const nl = {
         name: "Maatwerk",
         price: "op aanvraag",
         minPrice: null,
+        page: "webshop" as PageKey,
         description:
           "Webshop, boekingssysteem, portaal met inlog. Alles wat verder gaat dan een brochure.",
         points: ["Koppelingen & API's", "Inlog en rollen", "Onderhoud & hosting"],
@@ -151,7 +160,7 @@ const nl = {
       {
         question: "Wat gaat dit kosten?",
         answer:
-          "De richtprijzen staan hierboven bij Diensten. Na het kennismakingsgesprek krijg je een vaste prijs — geen uurtje-factuurtje, geen verrassing achteraf.",
+          "Een landingspagina vanaf €550, een bedrijfswebsite van vijf tot tien pagina's vanaf €1.450, een webshop of ander maatwerk op aanvraag. Alles inclusief btw. Na het kennismakingsgesprek krijg je een vaste prijs — geen uurtje-factuurtje, geen verrassing achteraf.",
       },
       {
         question: "Hoe lang duurt het voor de site live staat?",
@@ -226,6 +235,7 @@ const nl = {
     vat: "Btw-id",
     privacy: "Privacyverklaring",
     terms: "Algemene voorwaarden",
+    pages: "Pagina's",
   },
   legal: {
     back: "Terug naar de site",
@@ -236,29 +246,30 @@ const nl = {
     terms: "Algemene voorwaarden",
   },
   langSwitch: { label: "Taal", other: "English" },
+  pages: pageCopy.nl,
 }
 
 export type Dict = typeof nl
 
 const en: Dict = {
   meta: {
-    title: "fynnworks — websites that earn their keep",
+    title: "Website built from €550 — fynnworks | Freelancers & SMEs",
     description:
-      "Websites for small businesses, built by a student. Sharp pricing, no agency rate — from €550, and you talk to the person who builds it.",
+      "Need a website for your freelance business or SME? fynnworks builds landing pages, business sites and web shops from €550, live within 2 weeks. No agency rate: you talk directly to the builder.",
   },
   nav: {
     label: "Main navigation",
     menu: "Menu",
     skip: "Skip to content",
     work: "Work",
-    services: "Services",
+    pricing: "Pricing",
     process: "Process",
     faq: "FAQ",
     contact: "Contact",
     cta: "Start a project",
   },
   hero: {
-    eyebrow: "Web design & development",
+    eyebrow: "Websites for freelancers & SMEs",
     title: "Websites that\nearn their keep.",
     tagline: "Student rates, not student work.",
     lead:
@@ -276,6 +287,7 @@ const en: Dict = {
         name: "Landing page",
         price: "from €550",
         minPrice: 550,
+        page: "landing",
         description:
           "One page doing one job: turning visitors into enquiries. Live within two weeks.",
         points: ["Custom design", "Contact form", "Findable on Google"],
@@ -284,6 +296,7 @@ const en: Dict = {
         name: "Multi-page site",
         price: "from €1,450",
         minPrice: 1450,
+        page: "business",
         description:
           "Multiple pages, a clear story, and a structure that lasts you years.",
         points: ["5–10 pages", "Copy guidance", "Editable by you"],
@@ -292,6 +305,7 @@ const en: Dict = {
         name: "Custom build",
         price: "on request",
         minPrice: null,
+        page: "webshop",
         description:
           "Web shop, booking system, portal with logins. Anything beyond a brochure.",
         points: ["Integrations & APIs", "Auth and roles", "Hosting & upkeep"],
@@ -373,7 +387,7 @@ const en: Dict = {
       {
         question: "What is this going to cost?",
         answer:
-          "Ballpark prices are under Services above. After the intro call you get a fixed price — no hourly billing, no surprises at the end.",
+          "A landing page from €550, a five to ten page business website from €1,450, a web shop or other custom build on request. All including VAT. After the intro call you get a fixed price — no hourly billing, no surprises at the end.",
       },
       {
         question: "How long until the site is live?",
@@ -441,6 +455,7 @@ const en: Dict = {
     vat: "VAT",
     privacy: "Privacy statement",
     terms: "Terms and conditions",
+    pages: "Pages",
   },
   legal: {
     back: "Back to the site",
@@ -450,6 +465,7 @@ const en: Dict = {
     terms: "Terms and conditions",
   },
   langSwitch: { label: "Language", other: "Nederlands" },
+  pages: pageCopy.en,
 }
 
 export const dictionaries: Record<Lang, Dict> = { nl, en }

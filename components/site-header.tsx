@@ -1,15 +1,18 @@
 import Link from "next/link"
 import type { Dict, Lang } from "@/content/dictionaries"
 import { MobileNav } from "@/components/mobile-nav"
+import { pageHref } from "@/lib/pages"
 import { SITE } from "@/lib/site"
 
 export function SiteHeader({ dict, lang }: { dict: Dict; lang: Lang }) {
   const other: Lang = lang === "nl" ? "en" : "nl"
+  // Echte pagina's in plaats van #ankers: die werken ook vanaf een subpagina,
+  // en elke link vanuit het menu vertelt Google dat die pagina ertoe doet.
   const links = [
-    { href: "#work", label: dict.nav.work },
-    { href: "#services", label: dict.nav.services },
-    { href: "#process", label: dict.nav.process },
-    { href: "#faq", label: dict.nav.faq },
+    { href: pageHref(lang, "work"), label: dict.nav.work },
+    { href: pageHref(lang, "pricing"), label: dict.nav.pricing },
+    { href: pageHref(lang, "process"), label: dict.nav.process },
+    { href: pageHref(lang, "faq"), label: dict.nav.faq },
   ]
 
   return (
@@ -23,7 +26,7 @@ export function SiteHeader({ dict, lang }: { dict: Dict; lang: Lang }) {
         </Link>
 
         <nav aria-label={dict.nav.label} className="ml-auto flex items-center">
-          {/* Op mobiel klapt dezelfde lijst uit een <details>; de ankerlinks
+          {/* Op mobiel klapt dezelfde lijst uit een <details>; de menulinks
               verdwijnen daar niet meer helemaal. */}
           <MobileNav links={links} label={dict.nav.menu} />
 
@@ -53,10 +56,11 @@ export function SiteHeader({ dict, lang }: { dict: Dict; lang: Lang }) {
           {other}
         </Link>
 
-        {/* Blijft ook op mobiel staan: de ankerlinks mogen weg op een klein
-            scherm, de enige call-to-action niet. */}
+        {/* Blijft ook op mobiel staan: de menulinks mogen weg op een klein
+            scherm, de enige call-to-action niet. Naar het formulier op de
+            homepage, zodat hij ook werkt op een pagina zonder formulier. */}
         <a
-          href="#contact"
+          href={`/${lang}#contact`}
           className="relative rounded-full bg-warm px-4 py-1.5 text-sm font-medium whitespace-nowrap text-warm-foreground transition-transform duration-200 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 active:translate-y-0 active:duration-75 after:absolute after:inset-x-0 after:top-1/2 after:h-11 after:-translate-y-1/2 after:content-['']"
         >
           {dict.nav.cta}

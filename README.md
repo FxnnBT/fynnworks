@@ -19,6 +19,7 @@ Zelf teksten, prijzen of projecten wijzigen: zie **[AANPASSEN.md](AANPASSEN.md)*
 | Pad | Inhoud |
 |---|---|
 | `content/dictionaries.ts` | Alle teksten, NL en EN naast elkaar |
+| `content/pages.ts` | Teksten van de losse pagina's; URL's staan in `lib/pages.ts` |
 | `content/projects.ts` | Startlijst portfolio-items; daarna beheer je ze op `/admin` |
 | `lib/store.ts` | Schrijfbare opslag: projecten, reviews, uploads |
 | `app/admin/` | Beheerpagina: werk toevoegen, reviews goedkeuren |

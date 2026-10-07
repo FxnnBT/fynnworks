@@ -1,11 +1,12 @@
 # Wat jij nog moet aanpassen
 
-Alles wat op de site staat komt uit vier bestanden. Je hoeft nergens
+Alles wat op de site staat komt uit vijf bestanden. Je hoeft nergens
 componenten open te maken om tekst, prijzen of projecten te wijzigen.
 
 | Bestand | Waarvoor |
 |---|---|
-| `content/dictionaries.ts` | **Alle teksten**, Nederlands en Engels |
+| `content/dictionaries.ts` | **Alle teksten** van de homepage, Nederlands en Engels |
+| `content/pages.ts` | Teksten van de losse pagina's (prijzen, portfolio, over mij, de dienstpagina's), plus hun titel en omschrijving in Google |
 | `content/projects.ts` | Startlijst portfolio-items — daarna beheer je ze op `/admin` |
 | `lib/site.ts` | Naam, domein, zichtbaar e-mailadres |
 | `.env.local` | SMTP-gegevens (niet in git) |
@@ -51,7 +52,7 @@ Open `content/dictionaries.ts`. Onderstaande sleutels zitten allemaal in het
 
 | Wat je ziet | Sleutel |
 |---|---|
-| Menu-items "Werk / Diensten / Werkwijze / Vragen" | `nav.work`, `nav.services`, `nav.process`, `nav.faq` |
+| Menu-items "Werk / Prijzen / Werkwijze / Vragen" | `nav.work`, `nav.pricing`, `nav.process`, `nav.faq` |
 | Gele knop rechtsboven | `nav.cta` |
 
 De naam **fynnworks** linksboven komt uit `lib/site.ts` (`SITE.name`).

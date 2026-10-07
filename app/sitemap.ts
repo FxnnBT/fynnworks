@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { LANGS } from "@/content/dictionaries"
 import { LEGAL } from "@/lib/legal"
+import { PAGES } from "@/lib/pages"
 import { SITE } from "@/lib/site"
 
 // Geen lastModified: die zou bij elke build veranderen zonder dat de inhoud
@@ -15,10 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   }))
 
-  // De juridische pagina's horen vindbaar te zijn: dat is het halve punt van
-  // ze publiceren. Slugs verschillen per taal, dus die komen uit LEGAL.
-  const legal = LANGS.flatMap((lang) =>
-    Object.values(LEGAL).map((doc) => ({
+  // De losse pagina's en de juridische. Die laatste horen ook vindbaar te
+  // zijn: dat is het halve punt van ze publiceren. Slugs verschillen per taal.
+  const docs = [...Object.values(PAGES), ...Object.values(LEGAL)]
+  const sub = LANGS.flatMap((lang) =>
+    docs.map((doc) => ({
       url: `${SITE.url}/${lang}/${doc.slug[lang]}`,
       alternates: {
         languages: Object.fromEntries(
@@ -28,5 +30,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   )
 
-  return [...home, ...legal]
+  return [...home, ...sub]
 }

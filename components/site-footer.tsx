@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { Dict, Lang } from "@/content/dictionaries"
 import { LEGAL } from "@/lib/legal"
+import { PAGES, type PageKey, pageHref } from "@/lib/pages"
 import { BUSINESS, SITE } from "@/lib/site"
 
 export function SiteFooter({ dict, lang }: { dict: Dict; lang: Lang }) {
@@ -14,6 +15,24 @@ export function SiteFooter({ dict, lang }: { dict: Dict; lang: Lang }) {
             © {new Date().getFullYear()} {SITE.name}. {dict.footer.rights}
           </p>
         </div>
+
+        {/* Elke pagina vanaf elke pagina bereikbaar. Google volgt links; een
+            pagina waar niets naartoe linkt, komt hooguit via de sitemap
+            binnen en weegt dan licht. */}
+        <nav aria-label={dict.footer.pages}>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {(Object.keys(PAGES) as PageKey[]).map((key) => (
+              <li key={key}>
+                <Link
+                  href={pageHref(lang, key)}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {dict.pages[key].label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {/* Art. 3:15d BW en de Dienstenwet: vestigingsadres, KvK-nummer en
             btw-identificatienummer moeten op de site zelf staan, niet pas op de

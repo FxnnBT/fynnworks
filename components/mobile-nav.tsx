@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react"
 
-/** Ankerlink in het menu. Zelfde vorm als de lijst in site-header.tsx. */
+/** Link in het menu. Zelfde vorm als de lijst in site-header.tsx. */
 type NavLink = { href: string; label: string }
 
 export function MobileNav({

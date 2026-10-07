@@ -31,7 +31,9 @@ export async function generateMetadata({
   const dict = getDictionary(lang)
   return {
     metadataBase: new URL(SITE.url),
-    title: dict.meta.title,
+    // default is de homepage; subpagina's geven alleen hun eigen titel op en
+    // krijgen er " | fynnworks" achter.
+    title: { default: dict.meta.title, template: `%s | ${SITE.name}` },
     description: dict.meta.description,
     alternates: {
       canonical: `/${lang}`,
@@ -87,7 +89,7 @@ export default async function LangLayout({
         {/* Vertelt Google en de AI-crawlers dat "fynnworks" een bedrijf is,
             wat het aanbiedt en wat het kost. Opgebouwd in lib/jsonld.ts uit
             lib/site.ts en de dictionary — vaste waarden, geen bezoekersinvoer,
-            dus veilig in een script-tag. */}
+            dus veilig in een script-tag. De vragen staan apart op /faq. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(dict, lang)) }}

@@ -1,8 +1,10 @@
-import { Check } from "lucide-react"
-import type { Dict } from "@/content/dictionaries"
+import Link from "next/link"
+import { ArrowRight, Check } from "lucide-react"
+import type { Dict, Lang } from "@/content/dictionaries"
 import { SectionHeading } from "@/components/section-heading"
+import { pageHref } from "@/lib/pages"
 
-export function Services({ dict }: { dict: Dict }) {
+export function Services({ dict, lang }: { dict: Dict; lang: Lang }) {
   return (
     <section id="services" className="section-y scroll-mt-14">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -47,9 +49,22 @@ export function Services({ dict }: { dict: Dict }) {
                 </p>
               </div>
 
-              <p className="text-muted-foreground md:col-span-4">
-                {item.description}
-              </p>
+              <div className="md:col-span-4">
+                <p className="text-muted-foreground">{item.description}</p>
+                {/* Gewone tekstlink, niet de hele rij: de linktekst is de
+                    zoekterm ("landingspagina laten maken"), en dat is wat
+                    Google van een interne link meeneemt. */}
+                <Link
+                  href={pageHref(lang, item.page)}
+                  className="group mt-4 inline-flex items-center gap-1.5 text-sm text-warm"
+                >
+                  {dict.pages[item.page].label}
+                  <ArrowRight
+                    aria-hidden
+                    className="size-3.5 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-0.5"
+                  />
+                </Link>
+              </div>
 
               <ul className="flex flex-col gap-2 md:col-span-3">
                 {item.points.map((point) => (

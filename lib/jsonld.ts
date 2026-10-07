@@ -1,6 +1,7 @@
 import type { Dict, Lang } from "@/content/dictionaries"
 // Relatief en mét extensie, zodat `node --test lib/*.test.ts` dit bestand
 // rechtstreeks kan draaien: die resolver kent de @/-alias niet.
+import { PAGES } from "./pages.ts"
 import { BUSINESS, SITE } from "./site.ts"
 
 /**
@@ -64,11 +65,18 @@ function offerCatalog(dict: Dict) {
  * machineleesbaar: Google toont er sinds 2023 geen sterretjes meer bij, maar
  * het is wel precies wat ChatGPT, Claude en Perplexity oppikken als ze "wat
  * kost een website bij fynnworks" moeten beantwoorden.
+ *
+ * Alleen op de FAQ-pagina, niet op de homepage waar dezelfde vragen ook staan:
+ * Google wil dezelfde vragen maar één keer per site gemarkeerd zien, en nooit
+ * op een pagina waar ze niet zichtbaar zijn.
  */
-function faqPage(dict: Dict, lang: Lang) {
+export function faqJsonLd(dict: Dict, lang: Lang) {
+  const url = `${SITE.url}/${lang}/${PAGES.faq.slug[lang]}`
   return {
+    "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${SITE.url}/${lang}#faq`,
+    "@id": url,
+    url,
     inLanguage: lang,
     mainEntity: dict.faq.items.map((item) => ({
       "@type": "Question",
@@ -78,33 +86,27 @@ function faqPage(dict: Dict, lang: Lang) {
   }
 }
 
-/** Eén @graph met twee knopen die naar elkaar kunnen verwijzen, in plaats van
- *  losse script-tags die elk hun eigen fynnworks beschrijven. */
+/** Het bedrijf zelf. Staat via de layout op elke pagina. */
 export function jsonLd(dict: Dict, lang: Lang) {
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "ProfessionalService",
-        "@id": `${SITE.url}/#business`,
-        name: SITE.name,
-        legalName: real(BUSINESS.legalName),
-        description: dict.meta.description,
-        url: `${SITE.url}/${lang}`,
-        email: SITE.email,
-        vatID: real(BUSINESS.vat),
-        identifier: kvkIdentifier(),
-        address: postalAddress(),
-        logo: `${SITE.url}/icon.png`,
-        image: `${SITE.url}/icon.png`,
-        areaServed: "NL",
-        knowsLanguage: ["nl", "en"],
-        serviceType: "Webdesign en webdevelopment",
-        // Lege lijst weglaten: "sameAs": [] zegt niets en ziet er kapot uit.
-        sameAs: SITE.profiles.length ? [...SITE.profiles] : undefined,
-        hasOfferCatalog: offerCatalog(dict),
-      },
-      faqPage(dict, lang),
-    ],
+    "@type": "ProfessionalService",
+    "@id": `${SITE.url}/#business`,
+    name: SITE.name,
+    legalName: real(BUSINESS.legalName),
+    description: dict.meta.description,
+    url: `${SITE.url}/${lang}`,
+    email: SITE.email,
+    vatID: real(BUSINESS.vat),
+    identifier: kvkIdentifier(),
+    address: postalAddress(),
+    logo: `${SITE.url}/icon.png`,
+    image: `${SITE.url}/icon.png`,
+    areaServed: "NL",
+    knowsLanguage: ["nl", "en"],
+    serviceType: "Webdesign en webdevelopment",
+    // Lege lijst weglaten: "sameAs": [] zegt niets en ziet er kapot uit.
+    sameAs: SITE.profiles.length ? [...SITE.profiles] : undefined,
+    hasOfferCatalog: offerCatalog(dict),
   }
 }
