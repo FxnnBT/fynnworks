@@ -55,7 +55,55 @@ async function legalHtml(key: LegalKey, lang: Lang): Promise<string> {
 function alternates(lang: Lang, slug: Record<Lang, string>) {
   return {
     canonical: `/${lang}/${slug[lang]}`,
-    languages: Object.fromEntries(LANGS.map((l) => [l, `/${l}/${slug[l]}`])),
+    languages: {
+      ...Object.fromEntries(LANGS.map((l) => [l, `/${l}/${slug[l]}`])),
+      // Zelfde reden als in de layout: anders kiest Google zelf een variant.
+      "x-default": `/nl/${slug.nl}`,
+    },
+  }
+}
+
+/**
+ * Titel, omschrijving, canonical en de deelkaart van één pagina.
+ *
+ * openGraph en twitter vervangen die van de layout in hun geheel (Next voegt
+ * metadata ondiep samen), dus alles wat de layout zet staat hier opnieuw.
+ * Anders deelt een link naar /prijzen de titel van de homepage. Ook de
+ * afbeelding: die van ../opengraph-image.tsx valt mee weg.
+ */
+function docMetadata(
+  lang: Lang,
+  slug: Record<Lang, string>,
+  title: string,
+  description: string,
+): Metadata {
+  const links = alternates(lang, slug)
+  const shared = `${title} | ${SITE.name}`
+  const image = {
+    url: `/${lang}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: SITE.name,
+  }
+  return {
+    title,
+    description,
+    alternates: links,
+    openGraph: {
+      title: shared,
+      description,
+      url: links.canonical,
+      siteName: SITE.name,
+      locale: lang === "nl" ? "nl_NL" : "en_US",
+      type: "website",
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: shared,
+      description,
+      images: [image],
+    },
   }
 }
 
@@ -71,46 +119,17 @@ export async function generateMetadata({
   const page = pageKeyBySlug(lang, doc)
   if (page) {
     const { title, description } = dict.pages[page]
-    const links = alternates(lang, PAGES[page].slug)
-    // openGraph en twitter vervangen die van de layout in hun geheel (Next
-    // voegt metadata ondiep samen), dus alles wat de layout zet staat hier
-    // opnieuw. Anders deelt een link naar /prijzen de titel van de homepage.
-    // Ook de afbeelding: die van ../opengraph-image.tsx valt mee weg.
-    const shared = `${title} | ${SITE.name}`
-    const image = {
-      url: `/${lang}/opengraph-image`,
-      width: 1200,
-      height: 630,
-      alt: SITE.name,
-    }
-    return {
-      title,
-      description,
-      alternates: links,
-      openGraph: {
-        title: shared,
-        description,
-        url: links.canonical,
-        siteName: SITE.name,
-        locale: lang === "nl" ? "nl_NL" : "en_US",
-        type: "website",
-        images: [image],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: shared,
-        description,
-        images: [image],
-      },
-    }
+    return docMetadata(lang, PAGES[page].slug, title, description)
   }
 
   const key = legalKeyBySlug(lang, doc)
   if (!key) return {}
-  return {
-    title: dict.legal[key],
-    alternates: alternates(lang, LEGAL[key].slug),
-  }
+  return docMetadata(
+    lang,
+    LEGAL[key].slug,
+    dict.legal[key],
+    dict.legal.descriptions[key],
+  )
 }
 
 export default async function DocPage({

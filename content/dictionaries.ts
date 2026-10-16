@@ -16,7 +16,7 @@ const nl = {
     // klikt. Description rond de 150 tekens, daarna knipt Google af.
     title: "Website laten maken vanaf €550 — fynnworks | ZZP & MKB",
     description:
-      "Website laten maken voor ZZP of MKB? fynnworks bouwt landingspagina's, bedrijfssites en webshops vanaf €550, binnen 2 weken live. Geen bureautarief: je praat direct met de bouwer.",
+      "Website laten maken voor ZZP of MKB? Landingspagina's, bedrijfssites en webshops vanaf €550, binnen 2 weken live. Je praat direct met de bouwer.",
   },
   nav: {
     label: "Hoofdnavigatie",
@@ -156,6 +156,7 @@ const nl = {
     eyebrow: "Vragen",
     title: "Wat mensen meestal vragen",
     lead: "Staat je vraag er niet bij? Stel hem hieronder.",
+    more: "Alle vragen",
     items: [
       {
         question: "Wat gaat dit kosten?",
@@ -244,6 +245,14 @@ const nl = {
     termsNotice: "",
     privacy: "Privacyverklaring",
     terms: "Algemene voorwaarden",
+    // Wat Google onder de titel toont. Zonder deze erven ze die van de
+    // homepage, en dan hebben vier URL's dezelfde omschrijving.
+    descriptions: {
+      privacy:
+        "Welke gegevens fynnworks verwerkt via de formulieren, reviews en bezoekersstatistieken, hoe lang ze bewaard blijven en welke rechten je hebt.",
+      terms:
+        "De algemene voorwaarden van fynnworks: offertes, oplevering, betaling, meerwerk, eigendom van je site, aansprakelijkheid en herroepingsrecht.",
+    },
   },
   langSwitch: { label: "Taal", other: "English" },
   pages: pageCopy.nl,
@@ -255,7 +264,7 @@ const en: Dict = {
   meta: {
     title: "Website built from €550 — fynnworks | Freelancers & SMEs",
     description:
-      "Need a website for your freelance business or SME? fynnworks builds landing pages, business sites and web shops from €550, live within 2 weeks. No agency rate: you talk directly to the builder.",
+      "Need a website for your business? Landing pages, business sites and web shops from €550, live within 2 weeks. You talk directly to the builder.",
   },
   nav: {
     label: "Main navigation",
@@ -383,6 +392,7 @@ const en: Dict = {
     eyebrow: "FAQ",
     title: "What people usually ask",
     lead: "Question not covered? Ask it below.",
+    more: "All questions",
     items: [
       {
         question: "What is this going to cost?",
@@ -463,6 +473,12 @@ const en: Dict = {
       "These terms are written in Dutch and governed by Dutch law. The Dutch text below is the binding version; no translation takes its place. Happy to walk you through it in English — just ask.",
     privacy: "Privacy statement",
     terms: "Terms and conditions",
+    descriptions: {
+      privacy:
+        "What data fynnworks processes through its forms, reviews and visitor statistics, how long it is kept and what your rights are.",
+      terms:
+        "fynnworks' terms and conditions (in Dutch): quotes, delivery, payment, extra work, ownership of your site, liability and the right of withdrawal.",
+    },
   },
   langSwitch: { label: "Language", other: "Nederlands" },
   pages: pageCopy.en,

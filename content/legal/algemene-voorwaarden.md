@@ -314,7 +314,7 @@ Dit artikel geldt uitsluitend voor Consumenten en gaat bij strijdigheid voor op 
 
 ---
 
-# Bijlage — Modelformulier voor ontbinding
+## Bijlage — Modelformulier voor ontbinding
 
 *Alleen invullen en terugzenden als u de overeenkomst wilt ontbinden.*
 

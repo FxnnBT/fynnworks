@@ -34,12 +34,16 @@ export function Hero({ dict }: { dict: Dict }) {
       </div>
 
       <div className="relative mx-auto w-full max-w-6xl px-5 pb-20 pt-32 sm:px-8">
-        <p className="eyebrow mb-6 flex items-center gap-3">
-          <span className="h-px w-8 bg-warm" />
-          {dict.hero.eyebrow}
-        </p>
-
+        {/* De eyebrow zit ín de h1: daar staat de zoekterm ("website laten
+            maken"), de kop zelf is een slogan. Ziet er hetzelfde uit als de
+            losse eyebrow op de subpagina's; font-sans en leading-normal
+            omdat hij anders het serif-lettertype en de krappe regelhoogte van
+            de kop erft. */}
         <h1 className="text-display max-w-[15ch] whitespace-pre-line">
+          <span className="eyebrow mb-6 flex items-center gap-3 font-sans leading-normal">
+            <span className="h-px w-8 bg-warm" />
+            {dict.hero.eyebrow}
+          </span>
           {dict.hero.title}
         </h1>
 

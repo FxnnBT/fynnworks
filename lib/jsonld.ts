@@ -86,11 +86,18 @@ export function faqJsonLd(dict: Dict, lang: Lang) {
   }
 }
 
-/** Het bedrijf zelf. Staat via de layout op elke pagina. */
+/**
+ * Het bedrijf zelf. Staat via de layout op elke pagina.
+ *
+ * Organization en geen ProfessionalService: dat laatste is een LocalBusiness,
+ * een plek waar klanten langskomen. fynnworks werkt volledig online en het
+ * adres is een postadres, geen werkplek. Als adres van een Organization klopt
+ * het wel.
+ */
 export function jsonLd(dict: Dict, lang: Lang) {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Organization",
     "@id": `${SITE.url}/#business`,
     name: SITE.name,
     legalName: real(BUSINESS.legalName),
@@ -104,7 +111,6 @@ export function jsonLd(dict: Dict, lang: Lang) {
     image: `${SITE.url}/icon.png`,
     areaServed: "NL",
     knowsLanguage: ["nl", "en"],
-    serviceType: "Webdesign en webdevelopment",
     // Lege lijst weglaten: "sameAs": [] zegt niets en ziet er kapot uit.
     sameAs: SITE.profiles.length ? [...SITE.profiles] : undefined,
     hasOfferCatalog: offerCatalog(dict),

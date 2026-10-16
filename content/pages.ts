@@ -96,13 +96,13 @@ const nl: Record<PageKey, PageCopy> = {
   },
   about: {
     label: "Over mij",
-    title: "Over mij: Fynn Tervoort, webbouwer uit Bussum",
+    title: "Over mij: Fynn Tervoort, zelfstandig webbouwer",
     description:
-      "fynnworks is Fynn Tervoort, student en webbouwer uit Bussum. Ik ontwerp en bouw websites voor ZZP en MKB, zonder bureautarief en zonder tussenpersoon.",
+      "fynnworks is Fynn Tervoort, student en webbouwer. Ik ontwerp en bouw websites voor ZZP en MKB in heel Nederland, zonder bureautarief en zonder tussenpersoon.",
     eyebrow: "Over mij",
     heading: "Hoi, ik ben Fynn.",
     intro:
-      "Ik bouw websites naast mijn studie, vanuit Bussum. Ontwerp, bouw en oplevering doe ik zelf: je praat met degene die het werk maakt, niet met een accountmanager.",
+      "Ik bouw websites naast mijn studie en werk volledig online, voor klanten door heel Nederland. Ontwerp, bouw en oplevering doe ik zelf: je praat met degene die het werk maakt, niet met een accountmanager.",
     blocks: [
       {
         heading: "Waarom geen bureautarief?",
@@ -284,13 +284,13 @@ const en: Record<PageKey, PageCopy> = {
   },
   about: {
     label: "About",
-    title: "About: Fynn Tervoort, web builder from Bussum",
+    title: "About: Fynn Tervoort, independent web builder",
     description:
-      "fynnworks is Fynn Tervoort, a student and web builder from Bussum, the Netherlands. I design and build websites for small businesses, without the agency rate.",
+      "fynnworks is Fynn Tervoort, a student and web builder in the Netherlands. I design and build websites for small businesses, without the agency rate.",
     eyebrow: "About",
     heading: "Hi, I'm Fynn.",
     intro:
-      "I build websites alongside my studies, from Bussum in the Netherlands. Design, build and handover I do myself: you talk to the person doing the work, not an account manager.",
+      "I build websites alongside my studies and work fully online, for clients across the Netherlands. Design, build and handover I do myself: you talk to the person doing the work, not an account manager.",
     blocks: [
       {
         heading: "Why no agency rate?",

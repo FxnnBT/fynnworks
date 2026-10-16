@@ -10,9 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const home = LANGS.map((lang) => ({
     url: `${SITE.url}/${lang}`,
     alternates: {
-      languages: Object.fromEntries(
-        LANGS.map((l) => [l, `${SITE.url}/${l}`]),
-      ),
+      languages: {
+        ...Object.fromEntries(LANGS.map((l) => [l, `${SITE.url}/${l}`])),
+        "x-default": `${SITE.url}/nl`,
+      },
     },
   }))
 
@@ -23,9 +24,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     docs.map((doc) => ({
       url: `${SITE.url}/${lang}/${doc.slug[lang]}`,
       alternates: {
-        languages: Object.fromEntries(
-          LANGS.map((l) => [l, `${SITE.url}/${l}/${doc.slug[l]}`]),
-        ),
+        // x-default net als in de pagina's zelf: Google wil beide bronnen
+        // hetzelfde zien.
+        languages: {
+          ...Object.fromEntries(
+            LANGS.map((l) => [l, `${SITE.url}/${l}/${doc.slug[l]}`]),
+          ),
+          "x-default": `${SITE.url}/nl/${doc.slug.nl}`,
+        },
       },
     })),
   )

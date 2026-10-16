@@ -1,8 +1,18 @@
-import { Plus } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, Plus } from "lucide-react"
 import type { Dict } from "@/content/dictionaries"
 import { SectionHeading } from "@/components/section-heading"
 
-export function Faq({ dict }: { dict: Dict }) {
+/** Hoeveel vragen de homepage toont als er een link naar /faq bij staat. */
+const PREVIEW_COUNT = 4
+
+/**
+ * Met `more` (de URL van /faq) alleen de eerste vragen plus een link: staan
+ * alle vragen ook op de homepage, dan kiest Google die voor elke vraag en
+ * rankt /faq nooit.
+ */
+export function Faq({ dict, more }: { dict: Dict; more?: string }) {
+  const items = more ? dict.faq.items.slice(0, PREVIEW_COUNT) : dict.faq.items
   return (
     <section id="faq" className="section-y scroll-mt-14">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -17,7 +27,7 @@ export function Faq({ dict }: { dict: Dict }) {
             daardoor uit zichzelf goed. In oudere browsers blijven meerdere
             vragen open staan; dat is het enige verschil. */}
         <ul className="border-t border-line">
-          {dict.faq.items.map((item, index) => (
+          {items.map((item, index) => (
             <li key={item.question} className="border-b border-line">
               <details name="faq" className="group">
                 {/* minmax(0,1fr) in plaats van 1fr: anders krimpt de
@@ -50,6 +60,19 @@ export function Faq({ dict }: { dict: Dict }) {
             </li>
           ))}
         </ul>
+
+        {more ? (
+          <Link
+            href={more}
+            className="group mt-8 inline-flex items-center gap-1.5 text-sm text-warm"
+          >
+            {dict.faq.more}
+            <ArrowRight
+              aria-hidden
+              className="size-3.5 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-0.5"
+            />
+          </Link>
+        ) : null}
       </div>
     </section>
   )

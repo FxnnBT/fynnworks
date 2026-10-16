@@ -8,6 +8,7 @@ import { Process } from "@/components/process"
 import { Reviews } from "@/components/reviews"
 import { Services } from "@/components/services"
 import { Work } from "@/components/work"
+import { pageHref } from "@/lib/pages"
 
 // Werk en reviews staan op schijf, niet in de code. De layout genereert
 // statische params voor /nl en /en, dus zonder dit zou next build de lijst van
@@ -32,7 +33,7 @@ export default async function HomePage({
       <Reviews dict={dict} lang={lang} />
       <Services dict={dict} lang={lang} />
       <Process dict={dict} />
-      <Faq dict={dict} />
+      <Faq dict={dict} more={pageHref(lang, "faq")} />
       <Contact dict={dict} lang={lang} />
     </PageShell>
   )

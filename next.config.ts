@@ -20,7 +20,10 @@ const nextConfig: NextConfig = {
     serverActions: { bodySizeLimit: "10mb" },
   },
   async redirects() {
-    return [{ source: "/", destination: "/nl", permanent: false }]
+    // Permanent (308): bij een tijdelijke kan fynnworks.nl/ als losse URL in
+    // de index blijven staan naast /nl. Browsers onthouden een 308; wordt / ooit
+    // een taalkeuzepagina, dan blijven oude bezoekers nog even naar /nl gaan.
+    return [{ source: "/", destination: "/nl", permanent: true }]
   },
   // GoatCounter draait op de Pi en is van buiten het thuisnetwerk niet te
   // bereiken (zie deploy/goatcounter.service). Via fynnworks.nl zelf, zodat er
