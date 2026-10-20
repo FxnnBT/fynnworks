@@ -51,7 +51,7 @@ export async function Work({ dict, lang }: { dict: Dict; lang: Lang }) {
                 >
                   <Image
                     src={project.image}
-                    alt={`${project.client} — ${project.title[lang]}`}
+                    alt={`${project.client}: ${project.title[lang]}`}
                     width={wide ? 1600 : 1200}
                     height={wide ? 1000 : 750}
                     // Zonder muis is er geen scroll-onthulling: grijs zou daar

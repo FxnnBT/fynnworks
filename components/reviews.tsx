@@ -65,7 +65,7 @@ export async function Reviews({ dict, lang }: { dict: Dict; lang: Lang }) {
                     {review.name}
                     {review.company ? (
                       <span className="text-muted-foreground">
-                        {" — "}
+                        {", "}
                         {review.company}
                       </span>
                     ) : null}

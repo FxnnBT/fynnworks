@@ -14,7 +14,7 @@ const nl = {
     // Wat Google als blauwe kop en grijze tekst toont. De zoekterm voorop,
     // de prijs erin: dat is waar iemand die "website laten maken" zoekt op
     // klikt. Description rond de 150 tekens, daarna knipt Google af.
-    title: "Website laten maken vanaf €550 — fynnworks | ZZP & MKB",
+    title: "Website laten maken vanaf €550 voor ZZP & MKB | fynnworks",
     description:
       "Website laten maken voor ZZP of MKB? Landingspagina's, bedrijfssites en webshops vanaf €550, binnen 2 weken live. Je praat direct met de bouwer.",
   },
@@ -161,7 +161,7 @@ const nl = {
       {
         question: "Wat gaat dit kosten?",
         answer:
-          "Een landingspagina vanaf €550, een bedrijfswebsite van vijf tot tien pagina's vanaf €1.450, een webshop of ander maatwerk op aanvraag. Alles inclusief btw. Na het kennismakingsgesprek krijg je een vaste prijs — geen uurtje-factuurtje, geen verrassing achteraf.",
+          "Een landingspagina vanaf €550, een bedrijfswebsite van vijf tot tien pagina's vanaf €1.450, een webshop of ander maatwerk op aanvraag. Alles inclusief btw. Na het kennismakingsgesprek krijg je een vaste prijs: geen uurtje-factuurtje, geen verrassing achteraf.",
       },
       {
         question: "Hoe lang duurt het voor de site live staat?",
@@ -262,7 +262,7 @@ export type Dict = typeof nl
 
 const en: Dict = {
   meta: {
-    title: "Website built from €550 — fynnworks | Freelancers & SMEs",
+    title: "Website built from €550 for freelancers & SMEs | fynnworks",
     description:
       "Need a website for your business? Landing pages, business sites and web shops from €550, live within 2 weeks. You talk directly to the builder.",
   },
@@ -397,7 +397,7 @@ const en: Dict = {
       {
         question: "What is this going to cost?",
         answer:
-          "A landing page from €550, a five to ten page business website from €1,450, a web shop or other custom build on request. All including VAT. After the intro call you get a fixed price — no hourly billing, no surprises at the end.",
+          "A landing page from €550, a five to ten page business website from €1,450, a web shop or other custom build on request. All including VAT. After the intro call you get a fixed price: no hourly billing, no surprises at the end.",
       },
       {
         question: "How long until the site is live?",
