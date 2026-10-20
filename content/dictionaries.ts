@@ -129,6 +129,15 @@ const nl = {
   process: {
     eyebrow: "Werkwijze",
     title: "Zo gaat het",
+    /** De procesvideo boven de stappen. `src` + "-16x9.mp4" / "-4x5.mp4"
+     *  (en .jpg als stilstaand beeld) in public/video/, gerenderd uit het
+     *  Remotion-project fynnworks-promo (compositie Proces-*). */
+    video: {
+      src: "/video/proces-nl",
+      label: "Video: van gesprek tot livegang in vier stappen",
+      play: "Video afspelen",
+      pause: "Video pauzeren",
+    },
     steps: [
       {
         name: "Gesprek",
@@ -365,6 +374,12 @@ const en: Dict = {
   process: {
     eyebrow: "Process",
     title: "How it goes",
+    video: {
+      src: "/video/proces-en",
+      label: "Video: from first call to launch in four steps",
+      play: "Play video",
+      pause: "Pause video",
+    },
     steps: [
       {
         name: "Call",

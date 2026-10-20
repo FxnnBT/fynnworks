@@ -1,4 +1,5 @@
 import type { Dict } from "@/content/dictionaries"
+import { ProcessVideo } from "@/components/process-video"
 import { SectionHeading } from "@/components/section-heading"
 
 export function Process({ dict }: { dict: Dict }) {
@@ -9,6 +10,8 @@ export function Process({ dict }: { dict: Dict }) {
           eyebrow={dict.process.eyebrow}
           title={dict.process.title}
         />
+
+        <ProcessVideo video={dict.process.video} />
 
         <ol className="grid gap-px overflow-hidden rounded-2xl bg-line sm:grid-cols-2 lg:grid-cols-4">
           {dict.process.steps.map((step, index) => (
