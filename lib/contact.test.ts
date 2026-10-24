@@ -6,6 +6,8 @@ import {
   RATE_WINDOW_MS,
   checkRate,
   contactSchema,
+  domainAcceptsMail,
+  ipFrom,
   looksLikeSpam,
 } from "./contact.ts"
 
@@ -76,6 +78,65 @@ test("markeert een normale aanvraag met één link niet", () => {
     ),
     false,
   )
+})
+
+test("weigert scheldwoorden in naam en e-mail", () => {
+  const fails = (patch: Partial<typeof valid>) =>
+    !contactSchema.safeParse({ ...valid, ...patch }).success
+  assert.ok(fails({ email: "tepel@zuiger.nl" }))
+  assert.ok(fails({ email: "tepelzuiger@gmail.com" }))
+  assert.ok(fails({ name: "Tepel Zuiger" }))
+  assert.ok(fails({ name: "FUCK YOU" }))
+})
+
+test("woordfilter laat gewone namen en adressen met zo'n stukje erin door", () => {
+  const passes = (patch: Partial<typeof valid>) =>
+    contactSchema.safeParse({ ...valid, ...patch }).success
+  assert.ok(passes({ email: "info@stofzuigerwinkel.nl" }))
+  assert.ok(passes({ email: "catering@deboer.nl" }))
+  assert.ok(passes({ name: "Dick de Cock" }))
+  assert.ok(passes({ name: "Sanne Lulofs" }))
+})
+
+test("scheldwoord in het bericht: alleen een tag, geen weigering", () => {
+  const message = "Een site voor onze stichting tegen kanker, graag."
+  assert.equal(contactSchema.safeParse({ ...valid, message }).success, true)
+  assert.equal(looksLikeSpam(message), true)
+})
+
+test("rate-limit-IP is niet door de afzender te kiezen", () => {
+  const h = (init: Record<string, string>) => new Headers(init)
+  assert.equal(
+    ipFrom(h({ "cf-connecting-ip": "9.9.9.9", "x-forwarded-for": "1.1.1.1" })),
+    "9.9.9.9",
+  )
+  // Cloudflare/Caddy/nginx plakken het echte IP achteraan.
+  assert.equal(ipFrom(h({ "x-forwarded-for": "1.1.1.1, 9.9.9.9" })), "9.9.9.9")
+  assert.equal(ipFrom(h({})), "onbekend")
+})
+
+test("domeincheck: weigert alleen een definitief nee", async () => {
+  const dnsError = (code: string) => () =>
+    Promise.reject(Object.assign(new Error(code), { code }))
+  const mx = (...exchange: string[]) => () =>
+    Promise.resolve(exchange.map((e) => ({ exchange: e })))
+
+  assert.equal(await domainAcceptsMail("a@b.nl", mx("mx.b.nl")), true)
+  assert.equal(await domainAcceptsMail("a@gmail.con", dnsError("ENOTFOUND")), false)
+  assert.equal(await domainAcceptsMail("a@b.nl", dnsError("ENODATA")), false)
+  // RFC 7505 null-MX: c-ares geeft de root terug als lege string.
+  assert.equal(await domainAcceptsMail("a@b.nl", mx("")), false)
+  // DNS hapert: doorlaten, niet de klant weigeren.
+  assert.equal(await domainAcceptsMail("a@b.nl", dnsError("ETIMEOUT")), true)
+})
+
+test("domeincheck kijkt naar het deel na de laatste @", async () => {
+  let asked = ""
+  await domainAcceptsMail('"a@b"@c.nl', async (domain) => {
+    asked = domain
+    return [{ exchange: "mx.c.nl" }]
+  })
+  assert.equal(asked, "c.nl")
 })
 
 test("laat maximaal RATE_MAX verzendingen per uur toe", () => {

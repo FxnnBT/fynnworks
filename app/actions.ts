@@ -11,6 +11,8 @@ import {
   type ContactValues,
   checkRate,
   contactSchema,
+  domainAcceptsMail,
+  ipFrom,
   looksLikeSpam,
 } from "@/lib/contact"
 import {
@@ -62,10 +64,8 @@ async function mail(
   })
 }
 
-/** Caddy/nginx zetten x-forwarded-for; direct verkeer heeft 'm niet. */
 async function clientIp(): Promise<string> {
-  const forwarded = (await headers()).get("x-forwarded-for") ?? ""
-  return forwarded.split(",")[0]?.trim() || "onbekend"
+  return ipFrom(await headers())
 }
 
 export async function sendContact(
@@ -96,6 +96,11 @@ export async function sendContact(
   if (!checkRate(ip)) return { status: "error", reason: "rate", values }
 
   const { name, email, message } = parsed.data
+  // Ná de rate limit: anders is dit een gratis DNS-lookup-dienst voor bots.
+  if (!(await domainAcceptsMail(email))) {
+    return { status: "error", reason: "invalid", values, fields: ["email"] }
+  }
+
   try {
     await mail(
       // Wel versturen, alleen taggen — één mailboxregel op "[spam?]" ruimt op,

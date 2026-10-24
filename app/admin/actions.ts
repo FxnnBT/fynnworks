@@ -13,7 +13,7 @@ import {
 } from "@/lib/admin"
 import { adminSecret, requireAdmin } from "@/lib/auth"
 import { inviteSchema } from "@/lib/brief"
-import { checkRate } from "@/lib/contact"
+import { checkRate, ipFrom } from "@/lib/contact"
 import {
   getBriefs,
   getInvites,
@@ -30,8 +30,7 @@ import { projectSchema, saveUpload } from "@/lib/store"
 const loginRate = new Map<string, number[]>()
 
 async function clientIp(): Promise<string> {
-  const forwarded = (await headers()).get("x-forwarded-for") ?? ""
-  return forwarded.split(",")[0]?.trim() || "onbekend"
+  return ipFrom(await headers())
 }
 
 export async function login(
