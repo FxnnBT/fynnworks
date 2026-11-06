@@ -32,7 +32,7 @@ Om die reden zie je hier ook geen cookiebanner: er wordt geen cookie geplaatst w
 
 **Hoe lang:** aanvragen die niet tot een opdracht leiden bewaar ik maximaal twee jaar in mijn mailbox. Leidt het wel tot een opdracht, dan bewaar ik de correspondentie zeven jaar, omdat de Belastingdienst dat voor de administratie voorschrijft.
 
-**Bescherming tegen misbruik:** het formulier bevat een verborgen veld dat alleen geautomatiseerde invullers zien, meet hoe lang je over het invullen deed, en staat maximaal vijf verzendingen per uur per IP-adres toe. Die tellers staan alleen in het werkgeheugen van de server en verdwijnen bij een herstart. Er wordt niets over je vastgelegd op schijf.
+**Bescherming tegen misbruik:** het formulier is beschermd tegen spam, onder meer met een begrenzing van het aantal verzendingen per IP-adres. Die tellers staan alleen in het werkgeheugen van de server en verdwijnen bij een herstart. Er wordt niets over je vastgelegd op schijf.
 
 ---
 
@@ -66,7 +66,7 @@ Om die reden zie je hier ook geen cookiebanner: er wordt geen cookie geplaatst w
 
 **Toegang:** het formulier is alleen te bereiken via een persoonlijke uitnodigingslink die je van mij krijgt. Er is geen openbaar briefingformulier.
 
-**Bescherming tegen misbruik:** net als bij het contactformulier een verborgen veld, een meting van de invultijd en een begrenzing per IP-adres. Dat IP-adres wordt alleen voor die begrenzing gebruikt en wordt niet bij de briefing bewaard.
+**Bescherming tegen misbruik:** net als bij het contactformulier een begrenzing per IP-adres. Dat IP-adres wordt alleen voor die begrenzing gebruikt en wordt niet bij de briefing bewaard.
 
 ---
 
@@ -102,13 +102,7 @@ E-mail loopt via een SMTP-provider. Die verwerkt de inhoud van het contactformul
 
 ## 7. Cookies
 
-Er staat één cookie op deze site:
-
-| Cookie | Doel | Bewaartermijn |
-|---|---|---|
-| `fw_admin` | Houdt mij ingelogd op de beheerpagina | 30 dagen |
-
-Dit cookie wordt alleen geplaatst wanneer ík inlog op `/admin`. Als bezoeker krijg je het nooit. Het is strikt noodzakelijk voor een dienst die je uitdrukkelijk hebt gevraagd, en daarmee vrijgesteld van de toestemmingsverplichting van artikel 11.7a van de Telecommunicatiewet. Er is dus geen cookiebanner nodig, en die zetten we hier ook niet neer voor de vorm.
+Als bezoeker krijg je geen cookies. Er is er maar één, en die krijg alleen ik: hij houdt me ingelogd op het beheergedeelte van de site. Dat cookie is strikt noodzakelijk en daarmee vrijgesteld van de toestemmingsverplichting van artikel 11.7a van de Telecommunicatiewet. Er is dus geen cookiebanner nodig, en die zetten we hier ook niet neer voor de vorm.
 
 Er worden geen analytische, functionele of marketingcookies van derden geplaatst en er wordt niets in je localStorage bewaard.
 
@@ -140,7 +134,7 @@ Vind je dat ik je verzoek niet goed afhandel, dan kun je een klacht indienen bij
 
 ## 10. Beveiliging
 
-Al het verkeer loopt over HTTPS. De beheerpagina is met een wachtwoord afgeschermd en staat op `noindex`. Het aantal inlogpogingen is begrensd. Gegevens staan op eigen hardware, niet bij een derde partij. Wat klanten in de briefing uploaden is alleen voor de ingelogde beheerder op te vragen.
+Al het verkeer loopt over HTTPS. Het beheergedeelte is met een wachtwoord afgeschermd. Gegevens staan op eigen hardware, niet bij een derde partij. Wat klanten in de briefing uploaden is alleen voor de ingelogde beheerder op te vragen.
 
 ---
 

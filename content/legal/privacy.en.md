@@ -32,7 +32,7 @@ That is also why you see no cookie banner: no cookie requiring consent is placed
 
 **How long:** enquiries that do not lead to a project are kept in my mailbox for at most two years. If it does lead to a project, correspondence is kept for seven years, because Dutch tax law requires that retention period for business records.
 
-**Abuse protection:** the form contains a hidden field that only automated fillers see, measures how long you took to fill it in, and allows at most five submissions per hour per IP address. Those counters live only in the server's working memory and are cleared on restart. Nothing about you is written to disk.
+**Abuse protection:** the form is protected against spam, among other things by limiting the number of submissions per IP address. Those counters live only in the server's working memory and are cleared on restart. Nothing about you is written to disk.
 
 ---
 
@@ -66,7 +66,7 @@ That is also why you see no cookie banner: no cookie requiring consent is placed
 
 **Access:** the form is reachable only through a personal invitation link you receive from me. There is no public briefing form.
 
-**Abuse protection:** as with the contact form, a hidden field, a measurement of how long you took, and a per-IP-address limit. That IP address is used only for the limit and is not stored with the briefing.
+**Abuse protection:** as with the contact form, a per-IP-address limit. That IP address is used only for the limit and is not stored with the briefing.
 
 ---
 
@@ -102,13 +102,7 @@ Email is delivered through an SMTP provider. That provider processes the content
 
 ## 7. Cookies
 
-There is exactly one cookie on this site:
-
-| Cookie | Purpose | Retention |
-|---|---|---|
-| `fw_admin` | Keeps me signed in to the admin page | 30 days |
-
-It is only set when *I* sign in at `/admin`. As a visitor you never receive it. It is strictly necessary for a service explicitly requested by the user, and therefore exempt from the consent requirement of Article 11.7a of the Dutch Telecommunications Act (implementing the ePrivacy Directive). No cookie banner is required, and none is shown here just for appearances.
+As a visitor you receive no cookies. There is just one, and only I get it: it keeps me signed in to the admin area of the site. That cookie is strictly necessary and therefore exempt from the consent requirement of Article 11.7a of the Dutch Telecommunications Act (implementing the ePrivacy Directive). No cookie banner is required, and none is shown here just for appearances.
 
 No analytics, functional or third-party marketing cookies are placed, and nothing is stored in your browser's localStorage.
 
@@ -140,7 +134,7 @@ If you believe I am not handling your request properly, you can lodge a complain
 
 ## 10. Security
 
-All traffic runs over HTTPS. The admin page is password-protected and set to `noindex`. Login attempts are rate-limited. Data sits on my own hardware, not with a third party. Anything clients upload in the briefing is retrievable only by the signed-in administrator.
+All traffic runs over HTTPS. The admin area is password-protected. Data sits on my own hardware, not with a third party. Anything clients upload in the briefing is retrievable only by the signed-in administrator.
 
 ---
 
