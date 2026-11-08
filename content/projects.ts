@@ -9,7 +9,7 @@ export const projects: Project[] = [
   {
     slug: "marcel-hensema",
     client: "Marcel Hensema",
-    year: "2025",
+    year: "2026",
     title: {
       nl: "Site voor een theatermaker",
       en: "Site for a theatre maker",
