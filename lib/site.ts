@@ -55,5 +55,5 @@ export const BUSINESS = {
   /** Artikel 14.2: maximum aansprakelijkheid per gebeurtenis. */
   liabilityCap: "5.000",
   /** Datum waarop de privacyverklaring voor het laatst wijzigde. */
-  privacyDate: "TODO",
+  privacyDate: "6 november 2026",
 } as const
