@@ -77,6 +77,9 @@ export default async function LangLayout({
   return (
     <html
       lang={lang}
+      // Zonder dit laat Next 16 de smooth scroll uit globals.css aan tijdens
+      // een navigatie, en eindigt de taalwissel onderaan de pagina.
+      data-scroll-behavior="smooth"
       // Bewust alleen donker: de shader-hero is bijna-zwart, een lichte
       // variant zou een tweede ontwerp zijn.
       className={`dark ${geistSans.variable} ${geistMono.variable} ${display.variable} h-full antialiased`}
